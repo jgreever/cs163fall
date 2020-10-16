@@ -2,7 +2,7 @@
 
 int main()
 {
-    int MAX = 50;
+    //int MAX = 50;
     int choice = 0;
     char npriorityLevel[MAX];
     char nprojectName[MAX];
@@ -72,7 +72,11 @@ int main()
                 break;
 
             case 2:
-                //TODO
+                char toDelete[MAX];
+                std::cout << "Enter the name of the project you wish to delete: ";
+                std::cin.get(toDelete, MAX, '\n');
+                std::cin.ignore(100, '\n');
+                pobject.remove(toDelete);
                 break;
 
             case 3:

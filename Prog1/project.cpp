@@ -50,3 +50,28 @@ int project::display()
     }
     return 1;
 }
+
+int project::remove(char* searchNode)
+{
+    return project::remove(head, searchNode);
+}
+
+int project::remove(node*& head, char* searchNode)
+{
+    if (!head) return 0; //no list to delete
+    while (head != NULL)
+    {
+        if (head->aList.search(searchNode) == 0)
+        {
+            return project::remove(head->next, searchNode);
+        }
+        else if (head->aList.search(searchNode) == 1)
+        {
+            node* temp = head->next;
+            delete head;
+            head = temp;
+            return project::remove(head->next, searchNode);
+        }
+    }
+    return 1;
+}

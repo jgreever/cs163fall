@@ -81,3 +81,10 @@ int list::display()
 
     return 1;
 }
+
+int list::search(const char* searchNode)
+{
+    if (std::strcmp(projectName, searchNode) == 0)
+        return 0;
+    return 1;
+}
