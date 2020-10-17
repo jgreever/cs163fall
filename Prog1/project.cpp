@@ -19,7 +19,7 @@ project::~project()
     tail = NULL;
 }
 
-int project::add(const list& new_list)
+int project::add(list& new_list)
 { 
   node* temp = new node;
   if (!temp) return 0;
@@ -58,19 +58,19 @@ int project::remove(char* searchNode)
 
 int project::remove(node*& head, char* searchNode)
 {
-    if (!head) return 0; //no list to delete
+    //if (!head) return 0; //no list to delete
     while (head != NULL)
     {
-        if (head->aList.search(searchNode) == 0)
+        if (head->aList.search(searchNode) == 1)
         {
             return project::remove(head->next, searchNode);
         }
-        else if (head->aList.search(searchNode) == 1)
+        else if (head->aList.search(searchNode) == 0)
         {
             node* temp = head->next;
             delete head;
             head = temp;
-            return project::remove(head->next, searchNode);
+            return project::remove(head, searchNode);
         }
     }
     return 1;

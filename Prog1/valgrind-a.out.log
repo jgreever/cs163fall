@@ -1,0 +1,143 @@
+==1675030== Memcheck, a memory error detector
+==1675030== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1675030== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1675030== Command: ./a.out
+==1675030== Parent PID: 1663339
+==1675030== 
+==1675030== Invalid read of size 8
+==1675030==    at 0x10A30F: project::remove(node*&, char*) (project.cpp:61)
+==1675030==    by 0x10A3F1: project::remove(node*&, char*) (project.cpp:73)
+==1675030==    by 0x10A371: project::remove(node*&, char*) (project.cpp:66)
+==1675030==    by 0x10A371: project::remove(node*&, char*) (project.cpp:66)
+==1675030==    by 0x10A2EE: project::remove(char*) (project.cpp:56)
+==1675030==    by 0x109FA5: main (main.cpp:79)
+==1675030==  Address 0x38 is not stack'd, malloc'd or (recently) free'd
+==1675030== 
+==1675030== 
+==1675030== Process terminating with default action of signal 11 (SIGSEGV)
+==1675030==  Access not within mapped region at address 0x38
+==1675030==    at 0x10A30F: project::remove(node*&, char*) (project.cpp:61)
+==1675030==    by 0x10A3F1: project::remove(node*&, char*) (project.cpp:73)
+==1675030==    by 0x10A371: project::remove(node*&, char*) (project.cpp:66)
+==1675030==    by 0x10A371: project::remove(node*&, char*) (project.cpp:66)
+==1675030==    by 0x10A2EE: project::remove(char*) (project.cpp:56)
+==1675030==    by 0x109FA5: main (main.cpp:79)
+==1675030==  If you believe this happened as a result of a stack
+==1675030==  overflow in your program's main thread (unlikely but
+==1675030==  possible), you can try to increase the size of the
+==1675030==  main thread stack using the --main-stacksize= flag.
+==1675030==  The main thread stack size used in this run was 8388608.
+==1675030== 
+==1675030== HEAP SUMMARY:
+==1675030==     in use at exit: 221 bytes in 23 blocks
+==1675030==   total heap usage: 48 allocs, 25 frees, 75,130 bytes allocated
+==1675030== 
+==1675030== 3 bytes in 1 blocks are still reachable in loss record 1 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x1096B5: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:44)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 3 bytes in 1 blocks are still reachable in loss record 2 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x10980B: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:56)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x109609: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:38)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 4 bytes in 1 blocks are still reachable in loss record 4 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x109763: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:50)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 5 bytes in 1 blocks are still reachable in loss record 5 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x10965E: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:41)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 5 bytes in 1 blocks are still reachable in loss record 6 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x10970C: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:47)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 5 bytes in 1 blocks are still reachable in loss record 7 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x1097B7: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:53)
+==1675030==    by 0x109F16: main (main.cpp:64)
+==1675030== 
+==1675030== 8 bytes in 2 blocks are still reachable in loss record 8 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x1096B5: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:44)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 8 bytes in 2 blocks are still reachable in loss record 9 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x10980B: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:56)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 9 bytes in 2 blocks are still reachable in loss record 10 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x109609: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:38)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 9 bytes in 2 blocks are still reachable in loss record 11 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x109763: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:50)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 9 bytes in 2 blocks are still reachable in loss record 12 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x1097B7: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:53)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 10 bytes in 2 blocks are still reachable in loss record 13 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x10970C: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:47)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 11 bytes in 2 blocks are still reachable in loss record 14 of 15
+==1675030==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==1675030==    by 0x10965E: list::add(char*, char*, char*, char*, char*, char*, char*) (list.cpp:41)
+==1675030==    by 0x109892: list::add(list&) (list.cpp:64)
+==1675030==    by 0x10A1E5: project::add(list&) (project.cpp:26)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== 128 bytes in 2 blocks are still reachable in loss record 15 of 15
+==1675030==    at 0x483BE63: operator new(unsigned long) (vg_replace_malloc.c:344)
+==1675030==    by 0x10A1B2: project::add(list&) (project.cpp:24)
+==1675030==    by 0x109F33: main (main.cpp:67)
+==1675030== 
+==1675030== LEAK SUMMARY:
+==1675030==    definitely lost: 0 bytes in 0 blocks
+==1675030==    indirectly lost: 0 bytes in 0 blocks
+==1675030==      possibly lost: 0 bytes in 0 blocks
+==1675030==    still reachable: 221 bytes in 23 blocks
+==1675030==         suppressed: 0 bytes in 0 blocks
+==1675030== 
+==1675030== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==1675030== 
+==1675030== 1 errors in context 1 of 1:
+==1675030== Invalid read of size 8
+==1675030==    at 0x10A30F: project::remove(node*&, char*) (project.cpp:61)
+==1675030==    by 0x10A3F1: project::remove(node*&, char*) (project.cpp:73)
+==1675030==    by 0x10A371: project::remove(node*&, char*) (project.cpp:66)
+==1675030==    by 0x10A371: project::remove(node*&, char*) (project.cpp:66)
+==1675030==    by 0x10A2EE: project::remove(char*) (project.cpp:56)
+==1675030==    by 0x109FA5: main (main.cpp:79)
+==1675030==  Address 0x38 is not stack'd, malloc'd or (recently) free'd
+==1675030== 
+==1675030== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

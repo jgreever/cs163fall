@@ -59,7 +59,7 @@ int list::add(char apriorityLevel[], char aprojectName[], char aestimatedCost[],
                 return 1;
             }
 
-int list::add(const list& new_list)
+int list::add(list& new_list)
 {
     return list::add(new_list.priorityLevel, new_list.projectName, new_list.estimatedCost,
                new_list.lengthOfTime, new_list.needToHire, new_list.wantDoneBy,
@@ -82,9 +82,11 @@ int list::display()
     return 1;
 }
 
-int list::search(const char* searchNode)
+int list::search(char* searchNode)
 {
-    if (std::strcmp(projectName, searchNode) == 0)
+    char searchWord[MAX];
+    std::strcpy(searchWord, searchNode);
+    if (std::strcmp(projectName, searchWord) == 0)
         return 0;
     return 1;
 }

@@ -16,9 +16,9 @@ public:
     int add(char priorityLevel[], char projectName[], char estimatedCost[],
             char lengthOfTime[], char needToHire[], char wantDoneBy[],
             char rentSupplies[]);
-    int add(const list& new_list);
+    int add(list& new_list);
     int display();
-    int search(const char* searchNode);
+    int search(char* searchNode);
 
 private:
     char* priorityLevel;
