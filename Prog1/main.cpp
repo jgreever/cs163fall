@@ -80,7 +80,12 @@ int main()
                 break;
 
             case 3:
-                //TODO
+                char prioritySearch[MAX];
+                std::cout << "Enter the priority level you wish to display.\n";
+                std::cout << "High, Med, Low, or None: ";
+                std::cin.get(prioritySearch, 100, '\n');
+                std::cin.ignore(100, '\n');
+                pobject.displayPriority(prioritySearch);
                 break;
             case 4:
                 pobject.display();

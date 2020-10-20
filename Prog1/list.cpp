@@ -81,6 +81,15 @@ int list::display()
 
     return 1;
 }
+int list::searchPriority(char* searchNode)
+{
+    char searchWord[MAX];
+    std::strcpy(searchWord, searchNode);
+    if (std::strcmp(priorityLevel, searchWord) == 0)
+        return 0;
+    else
+        return 1;
+}
 
 int list::search(char* searchNode)
 {
@@ -88,5 +97,6 @@ int list::search(char* searchNode)
     std::strcpy(searchWord, searchNode);
     if (std::strcmp(projectName, searchWord) == 0)
         return 0;
-    return 1;
+    else
+        return 1;
 }

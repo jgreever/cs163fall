@@ -18,6 +18,7 @@ public:
             char rentSupplies[]);
     int add(list& new_list);
     int display();
+    int searchPriority(char* searchNode);
     int search(char* searchNode);
 
 private:

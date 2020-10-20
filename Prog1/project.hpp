@@ -13,6 +13,8 @@ class project
         ~project();
         int add(list& new_list);
         int display();
+        int displayPriority(char* searchNode);
+        int displayPriority(node*& head, char* searchNode);
         int remove(char* searchNode);
         int remove(node*& head, char* searchNode);
 
