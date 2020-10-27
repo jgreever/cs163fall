@@ -1,11 +1,29 @@
 #include "stack.hpp"
 
-int stack::push(const journal_entry & to_add)
+stack::stack()
+{
+  head = NULL;
+  top_index = 0;
+}
+
+stack::~stack()
+{
+  node* temp = NULL;
+  while (head)
+  {
+    temp = head->next;
+    delete head;
+    head = temp;
+  }
+  top_index = 0;
+}
+
+int stack::push(const alertEntry& to_add)
 {
   if (!head)
   {
     head = new node;
-    head->entries = new journal_entry[MAX];
+    head->entries = new alertEntry[MAX];
     head->next = NULL;
     top_index = 0;
   }
@@ -14,12 +32,12 @@ int stack::push(const journal_entry & to_add)
   {
     node* temp = head;
     head = new node;
-    head->entries = new journal_entry[MAX];
+    head->entries = new alertEntry[MAX];
     head->next = temp;
     top_index = 0;
   }
 
-  if (head->entries[top_index].copy_entry(to_add))
+  if (head->entries[top_index].create_entry(to_add))
     ++top_index;
   else
     return 0;
@@ -42,12 +60,18 @@ int stack::pop (void)
   return 1;
 }
 
-int stack::peek(journal_entry & at_top) const
+int stack::peek(alertEntry& at_top) const
 {
   if (!head) return 0; //nothing to do here boys, pack it up!
   if (top_index == 0)
     if (head->next == NULL)
       return 0;
       //TODO: create display function here.
+  return 1;
+}
+
+int stack::display_all(void) const
+{
+  if (!head) return 0;
   return 1;
 }

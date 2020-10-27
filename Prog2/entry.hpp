@@ -2,18 +2,19 @@
 #include <cctype>
 #include <iostream>
 
-class journal_entry
+class alertEntry
 {
   public:
-    journal_entry(void);
-    ~journal_entry(void);
-    int create_entry(char * title, char * notes);
-    int copy_entry(const journal_entry & a_new_entry);
-    int retrieve(char * title, journal_entry & found) const;
-    int retrieve(journal_entry & found) const;
+    alertEntry(void);
+    ~alertEntry(void);
+    int create_entry(char origin[], char date[], char time[], char message[], char priority[]);
+    int create_entry(const alertEntry& newEntry);
     int display(void) const;
 
   private:
-    char * title;
-    char * notes;
+    char* origin;
+    char* date;
+    char* time;
+    char* message;
+    char* priority;
 };
