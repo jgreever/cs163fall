@@ -8,7 +8,7 @@ stack::stack()
 
 stack::~stack()
 {
-  node* temp = NULL;
+  node *temp = NULL;
   while (head)
   {
     temp = head->next;
@@ -18,7 +18,7 @@ stack::~stack()
   top_index = 0;
 }
 
-int stack::push(const alertEntry& to_add)
+int stack::push(const alertEntry &to_add)
 {
   if (!head)
   {
@@ -30,7 +30,7 @@ int stack::push(const alertEntry& to_add)
 
   if (top_index == MAX)
   {
-    node* temp = head;
+    node *temp = head;
     head = new node;
     head->entries = new alertEntry[MAX];
     head->next = temp;
@@ -40,14 +40,15 @@ int stack::push(const alertEntry& to_add)
   if (head->entries[top_index].copy_entry(to_add))
     ++top_index;
   else
-    return 0;    
+    return 0;
   return 1;
 }
 
-int stack::pop (void)
+int stack::pop(void)
 {
-  if (!head) return 0; //can't do anything if nothing is there
-  node* temp = head->next;
+  if (!head)
+    return 0; //can't do anything if nothing is there
+  node *temp = head->next;
   if (top_index == 0)
   {
     if (head->entries != NULL)
@@ -66,7 +67,8 @@ int stack::pop (void)
 
 int stack::peek() const
 {
-  if (!head) return 0;
+  if (!head)
+    return 0;
   if (top_index == 0)
     if (head->next != NULL)
     {
@@ -81,6 +83,22 @@ int stack::peek() const
 
 int stack::display_all(void) const
 {
-  if (!head) return 0;
+  if (!head)
+    return 0;
+  int top = top_index;
+  while (top > 0)
+  {
+    head->entries[top - 1].display();
+    --top;
+  }
+  if (head->next != NULL)
+  {
+    top = top_index;
+    while (top > 0)
+    {
+      head->next->entries[top - 1].display();
+      --top;
+    }
+  }
   return 1;
 }
