@@ -37,36 +37,45 @@ int stack::push(const alertEntry& to_add)
     top_index = 0;
   }
 
-  if (head->entries[top_index].create_entry(to_add))
+  if (head->entries[top_index].copy_entry(to_add))
     ++top_index;
   else
-    return 0;
+    return 0;    
   return 1;
 }
 
 int stack::pop (void)
 {
   if (!head) return 0; //can't do anything if nothing is there
-  node* hold = head->next;
-  if (!top_index)
+  node* temp = head->next;
+  if (top_index == 0)
   {
-    if (head->entries)
+    if (head->entries != NULL)
       delete[] head->entries;
     delete head;
-    head = hold;
+    head = temp;
     top_index = MAX;
+    if (head != NULL)
+      top_index = MAX;
+    else
+      top_index = 0;
   }
   --top_index;
   return 1;
 }
 
-int stack::peek(alertEntry& at_top) const
+int stack::peek() const
 {
-  if (!head) return 0; //nothing to do here boys, pack it up!
+  if (!head) return 0;
   if (top_index == 0)
-    if (head->next == NULL)
+    if (head->next != NULL)
+    {
+      head->next->entries[top_index + 4].display();
+      return 1;
+    }
+    else
       return 0;
-      //TODO: create display function here.
+  head->entries[top_index - 1].display();
   return 1;
 }
 

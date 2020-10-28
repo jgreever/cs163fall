@@ -14,7 +14,7 @@ class stack
     stack();
     ~stack();
     int display_all(void) const;
-    int peek(alertEntry& at_top) const;
+    int peek() const;
     int push(const alertEntry& to_add);
     int pop (void);
 

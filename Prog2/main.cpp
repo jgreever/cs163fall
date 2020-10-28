@@ -32,52 +32,58 @@ int main()
     {
       case 1:
         cout << "Enter the Origin of the Notification:\n";
-
+        cin.get(origin, 101, '\n');
+        cin.ignore(100, '\n');
         cout << "Enter the date of the Notification:\n";
-
+        cin.get(date, 51, '\n');
+        cin.ignore(100, '\n');
         cout << "Enter the time of the Notification:\n";
-
+        cin.get(time, 11, '\n');
+        cin.ignore(100, '\n');
         cout << "Enter the Notification message:\n";
-
+        cin.get(message, 301, '\n');
+        cin.ignore(100, '\n');
         cout << "Enter the Notification priority:\n";
-        
+        cin.get(priority, 11, '\n');
+        cin.ignore(100, '\n');
+
         to_add.create_entry(origin, date, time, message, priority);
         alerts.push(to_add);
+        cin.clear();
         break;
       
       case 2:
         if (alerts.pop())
-          cout << "\nRemoved the most recent Notification...\n";
+          cout << "Removed the most recent Notification...\n";
         else
-          cout << "\nNo notifications in the list to delete...\n";
+          cout << "No notifications in the list to delete...\n";
+        cin.clear();
         break;
       
       case 3:
-        cout << "\nHere is the most recent Notification:\n";
-        //alerts.peek();
+        if (alerts.peek())
+          cout << "Is the most recent Notification.\n";
+        else
+          cout << "No recent Notifications.\n";
+        cin.clear();
         break;
     
       case 4:
-        cout << "\nThe stack contains the following Notifications: \n";
+        cout << "The stack contains the following Notifications: \n";
         alerts.display_all();
+        cin.clear();
         break;
 
       case 0:
+        cout << "\nThank you and goodbye!\n";
+        cin.clear();
         break;
 
       default:
         cout << "Invalid entry, try again.\n";
+        cin.clear();
         continue;
     }
-
   }
-
-  if (alerts.pop())
-  {
-
-    cout << "\n\nAfter removing this is what we have: ";
-    alerts.display_all();
-  }
-  else
-    cout << "\nNothing could be removed, the stack is empty! " << endl;
+  return 0;
 }
