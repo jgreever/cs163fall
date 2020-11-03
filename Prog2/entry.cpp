@@ -1,10 +1,33 @@
+/** entry.cpp
+ * 
+ * Justin Greever
+ * CS163 - Program 2
+ * 10/23/2020
+ * 
+ * This is our class file containing the functions
+ * that will be used to create and pass an entry
+ * to the stack class functions. It accepts the 
+ * following from the client:
+ *   origin, date, time, message, priority
+ * The functions it contains are:
+ *   alertEntry(); our constructor
+ *   ~alertEntry(); our destructor
+ *   create_entry(); grabs input and gives to
+ *     the copy_entry function.
+ *   copy_entry(); takes the data from create_entry
+ *     and packages it to be sent to the stack class
+ *     to be added to a stack/node.
+ */
+
 #include "entry.hpp"
 
+/** constructor */
 alertEntry::alertEntry()
 {
     origin = date = time = message = priority = NULL;
 }
 
+/** destructor */
 alertEntry::~alertEntry()
 {
     if (origin)
@@ -20,6 +43,11 @@ alertEntry::~alertEntry()
     origin = date = time = message = priority = NULL;
 }
 
+/** create_entry grabs values from the client to pass to the copy_entry function.
+ * it accepts char array values of origin, date, time, message, priority.
+ * we use the 'if (this->something)' statement to ensure that no data is already
+ * in use so we do not get memory errors.
+ */
 int alertEntry::create_entry(char* origin, char* date, char* time, char* message, char* priority)
 {
     if (this->origin)
@@ -50,6 +78,11 @@ int alertEntry::create_entry(char* origin, char* date, char* time, char* message
     return 1;
 }
 
+/** copy_entry takes the data from create_entry and packages
+ * it up to be sent to the stack function to be added into the 
+ * stack/node. It takes no input from the client and is shielded
+ * so that the client cannot directly interact with it.
+ */
 int alertEntry::copy_entry(const alertEntry& newEntry)
 {
     /*
@@ -68,12 +101,18 @@ int alertEntry::copy_entry(const alertEntry& newEntry)
     return alertEntry::create_entry(newEntry.origin, newEntry.date, newEntry.time, newEntry.message, newEntry.priority);
 }
 
+/** display is the lonely function. No values get passed to it,
+ * it's just expected to read from the list everytime someone
+ * shows interest in the list. Poor guy, all he wanted was to
+ * be loved. At least he has a voice to display the contents
+ * directly to the client/user without any problems!
+ */
 int alertEntry::display()
 {
-    std::cout << "Origin: " << origin << std::endl;
+    std::cout << "\nOrigin: " << origin << std::endl;
     std::cout << "Date: " << date << std::endl;
     std::cout << "Time: " << time << std::endl;
     std::cout << "Message: " << message << std::endl;
-    std::cout << "Priority: " << priority << std::endl;
+    std::cout << "Priority: " << priority << "\n" << std::endl;
     return 1;
 }

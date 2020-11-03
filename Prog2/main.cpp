@@ -1,3 +1,16 @@
+/** main.cpp
+ * 
+ * Justin Greever
+ * CS163 - Program 2
+ * 10/23/2020
+ * 
+ * This is the client/interface side of the program. It will allow
+ * you to enter various altert information via a simplified menu.
+ * 
+ * The object of this program is to learn how to use stacks. It allows
+ * a user to enter in a notification and it's various parts such as
+ * time/date/priority/message.
+ */
 #include "stack.hpp"
 using namespace std;
 
