@@ -110,6 +110,7 @@ int stack::peek() const
   if (!head)
     return 0;
   if (top_index == 0)
+  {
     if (head->next != NULL)
     {
       head->next->entries[top_index + 4].display();
@@ -117,6 +118,7 @@ int stack::peek() const
     }
     else
       return 0;
+  }
   head->entries[top_index - 1].display();
   return 1;
 }
