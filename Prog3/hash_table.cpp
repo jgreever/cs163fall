@@ -10,8 +10,23 @@ table::table(int size)
 
 table::~table()
 {
-    //TODO
-    //!Finish the destructor
+    node *temp;
+    node *temp_next;
+    for (int i = 0; i < hash_table_size; ++i)
+    {
+        if (!hash_table[i])
+        {
+            temp = hash_table[i];
+            while (!temp)
+            {
+                temp_next = temp->next;
+                delete temp;
+                temp = temp_next;
+            }
+            hash_table[i] = NULL;
+        }
+    }
+    delete[] hash_table;
 }
 
 int table::insert(char *key_value, const entry &to_add)

@@ -20,7 +20,7 @@ int queue::display(void)
 {
     if (!rear)
         return 0;
-    int success = rear->qEntry.display();
+    rear->qEntry.display();
     return 1;
 }
 
