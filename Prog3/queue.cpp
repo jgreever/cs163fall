@@ -1,11 +1,11 @@
 #include "queue.hpp"
 
-queue::queue(void)
+queue::queue()
 {
     rear = NULL;
 }
 
-queue::~queue(void)
+queue::~queue()
 {
     qNode *temp = rear;
     if (!rear)
@@ -16,10 +16,9 @@ queue::~queue(void)
     rear = NULL;
 }
 
-int queue::display(void)
+int queue::display()
 {
-    if (!rear)
-        return 0;
+    if (!rear) return 0;
     rear->qEntry.display();
     return 1;
 }
@@ -27,21 +26,21 @@ int queue::display(void)
 int queue::enqueue(const entry &to_add)
 {
     if (!rear)
-        return 0;
-    rear = new qNode;
-    rear->next = rear;
+    {
+        rear = new qNode;
+        rear->next = rear;
+    }
+    rear->qEntry.create_entry(to_add);
     qNode *temp = rear->next;
     rear->next = new qNode;
     rear = rear->next;
     rear->next = temp;
-    int success = rear->qEntry.copy_entry(to_add);
-    return success;
+    return 1;
 }
 
 int queue::dequeue()
 {
-    if (!rear)
-        return 0;
+    if (!rear) return 0;
     if (rear->next == rear)
     {
         delete rear;

@@ -11,9 +11,9 @@ struct qNode
 class queue
 {
     public:
-        queue(void);
-        ~queue(void);
-        int display(void);
+        queue();
+        ~queue();
+        int display();
         int enqueue(const entry &to_add);
         int dequeue();
 

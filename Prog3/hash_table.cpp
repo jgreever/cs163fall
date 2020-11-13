@@ -10,8 +10,7 @@ table::table(int size)
 
 table::~table()
 {
-    node *temp;
-    node *temp_next;
+    node *temp, *temp_next;
     for (int i = 0; i < hash_table_size; ++i)
     {
         if (!hash_table[i])
@@ -34,7 +33,7 @@ int table::insert(char *key_value, const entry &to_add)
     int tempKey = hash_function(key_value);
     node *temp = new node;
 
-    if (!temp->hEntry.copy_entry(to_add))
+    if (!temp->hEntry.create_entry(to_add))
     {
         delete temp;
         return 0;

@@ -9,7 +9,7 @@ class entry
         ~entry();
         int create_entry(char *name, char *location, char *hint);
         int display(void);
-        int copy_entry(const entry &anEntry);
+        int create_entry(const entry &anEntry);
         int retrieve(char *search_name, entry &found);
 
     private:
