@@ -2,6 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 class entry
 {
@@ -9,7 +10,7 @@ class entry
         entry();
         ~entry();
         int create_entry(char *name, char *location, char *hint);
-        int display(void);
+        int display();
         int create_entry(const entry &anEntry);
         int retrieve(char *search_name, entry &found);
 

@@ -1,4 +1,4 @@
-#include "entry.hpp"
+#include "queue.hpp"
 
 struct node
 {
@@ -11,6 +11,7 @@ class table
     public:
         table(int size = 12289);
         ~table(void);
+        bool load_from_file();
         int insert(char *key_value, const entry &to_add);
         int retrieve(char *name_to_find, entry &found) const;
         int hash_function(char *key) const;

@@ -1,6 +1,4 @@
-#include "hash_table.hpp"
-
-const int size = 10;
+#include "entry.hpp"
 
 struct qNode
 {

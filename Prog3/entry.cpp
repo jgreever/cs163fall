@@ -19,7 +19,6 @@ int entry::create_entry(char *aname, char *alocation, char *ahint)
   if (location) delete[] location;
   if (hint) delete[] hint;
   name = location = hint = NULL;
-
   name = new char[strlen(aname) + 1];
   strcpy(name, aname);
   location = new char[strlen(alocation) + 1];
@@ -35,7 +34,7 @@ int entry::create_entry(const entry &anEntry)
   return entry::create_entry(anEntry.name, anEntry.location, anEntry.hint);
 }
 
-int entry::display(void)
+int entry::display()
 {
   std::cout << "\nThe item to find is:";
   std::cout << "\nName: " << name;
@@ -73,7 +72,7 @@ int entry::retrieve(char *search_name, entry &found)
       found.hint = new char[strlen(hint) + 1];
       strcpy(found.hint, hint);
     }
-    found.display();
+    //found.display();
     return 1;
   }
   else

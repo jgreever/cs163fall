@@ -1,13 +1,21 @@
-#include "queue.hpp"
+#include "hash_table.hpp"
 
 int main()
 {
+    table aTable;
     entry anEntry;
     queue aQueue;
     char name[100];
     char location[300];
     char hint[300];
 
+    std::cout << "\nLoading hash table from file...\n";
+    if (aTable.load_from_file() == true)
+        std::cout << "\nHash Table loaded sucessfully!\n";
+    else
+        std::cout << "\nHash Table failed to load...\n";
+    
+    /*
     std::cout << "\n";
     std::cout << "Name: ";
     std::cin.get(name, 100, '\n');
@@ -18,7 +26,7 @@ int main()
     std::cout << "Hint: ";
     std::cin.get(hint, 300, '\n');
     std::cin.ignore(100, '\n');
-    /*
+    
     anEntry.create_entry(name, location, hint);
     anEntry.display();
     std::cout << "\nAn entry created and displayed.\n";
@@ -39,7 +47,7 @@ int main()
     std::cout << "Hint: ";
     std::cin.get(hint, 300, '\n');
     std::cin.ignore(100, '\n');
-    */
+    
     anEntry.create_entry(name, location, hint);
     aQueue.enqueue(anEntry);
     aQueue.display();
@@ -49,5 +57,6 @@ int main()
     aQueue.dequeue();
     if (aQueue.display() == 0)
         std::cout << "\nThe queue is empty. Nothing to display.\n";
+    */
     return 0;
 }
