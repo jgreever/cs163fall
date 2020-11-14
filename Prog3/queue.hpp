@@ -14,9 +14,11 @@ class queue
         queue();
         ~queue();
         int display();
+        int peek(entry &to_peek);
         int enqueue(const entry &to_add);
         int dequeue();
 
     private:
         qNode *rear;
+
 };

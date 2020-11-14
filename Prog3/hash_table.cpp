@@ -1,4 +1,5 @@
 #include "hash_table.hpp"
+using namespace std;
 
 table::table(int size)
 {

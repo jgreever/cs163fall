@@ -1,6 +1,7 @@
 #include <cctype>
 #include <cstring>
 #include <iostream>
+#include <fstream>
 
 class entry
 {

@@ -47,6 +47,7 @@ int main()
 
     std::cout <<"\nWe will now dequeue the last item.\n";
     aQueue.dequeue();
-    aQueue.display();
+    if (aQueue.display() == 0)
+        std::cout << "\nThe queue is empty. Nothing to display.\n";
     return 0;
 }

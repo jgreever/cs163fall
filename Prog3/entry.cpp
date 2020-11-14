@@ -37,6 +37,7 @@ int entry::create_entry(const entry &anEntry)
 
 int entry::display(void)
 {
+  std::cout << "\nThe item to find is:";
   std::cout << "\nName: " << name;
   std::cout << "\nLocation: " << location;
   std::cout << "\nHint: " << hint;
