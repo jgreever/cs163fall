@@ -7,16 +7,6 @@ queue::queue()
 
 queue::~queue()
 {
-    /*
-    qNode *temp = new qNode;
-    if (!rear)
-    {
-        temp = rear;
-        delete rear;
-        rear = temp->next;
-    }
-    rear = NULL;
-    */
     if (!rear)
         queue::dequeue();
 }

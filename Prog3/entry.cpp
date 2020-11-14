@@ -72,7 +72,7 @@ int entry::retrieve(char *search_name, entry &found)
       found.hint = new char[strlen(hint) + 1];
       strcpy(found.hint, hint);
     }
-    //found.display();
+    found.display();
     return 1;
   }
   else

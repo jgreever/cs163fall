@@ -2,10 +2,7 @@
 
 struct node
 {
-    //entry hEntry;
-    char *name;
-    char *location;
-    char *hint;
+    entry tEntry;
     node *next;
 };
 
@@ -16,6 +13,7 @@ class table
         ~table(void);
         bool load_from_file(void);
         int insert(char *name, char *location, char *hint);
+        int insert(entry &to_add, int tempKey);
         int retrieve(char *name_to_find) const;
         int hash_function(char *key) const;
 
