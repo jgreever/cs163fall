@@ -29,7 +29,7 @@ table::~table()
     delete[] hash_table;
 }
 
-bool table::load_from_file()
+bool table::load_from_file(void)
 {
     /*
     char tName[100];
@@ -52,19 +52,20 @@ bool table::load_from_file()
     string[fsize] = 0;
     */
     namefile.open("wordlist.txt", ios::in);
-    while (namefile)
+    while (namefile.good() && !namefile.eof())
     {
         char tName[100];
         char tLocation[300];
         char tHint[300];
-
+        
         namefile.getline(tName, 100, '|');
         namefile.clear();
         namefile.getline(tLocation, 300, '|');
         namefile.clear();
         namefile.getline(tHint, 300, '\n');
-        hEntry.create_entry(tName, tLocation, tHint);
-        insert(tName, hEntry);
+        
+        //hEntry.create_entry(tName, tLocation, tHint);
+        insert(tName, tLocation, tHint);
     }
     /*
     namefile.open("wordlist.txt", ios::in);
@@ -84,37 +85,62 @@ bool table::load_from_file()
     return true;
 }
 
-int table::insert(char *key_value, const entry &to_add)
+int table::insert(char *name, char *location, char *hint)
 {
-    int tempKey = hash_function(key_value);
+    int tempKey = hash_function(name);
     node *temp = new node;
 
-    if (!temp->hEntry.create_entry(to_add))
+    if (!temp)
     {
         delete temp;
         return 0;
     }
+    if (temp->name)
+        delete []temp->name;
+    temp->name = NULL;
+    temp->name = new char[strlen(name) +1];
+    strcpy(temp->name, name);
+    if (temp->location)
+        delete []temp->location;
+    temp->location = NULL;
+    temp->location = new char[strlen(name) + 1];
+    strcpy(temp->location, location);
+    if (temp->hint)
+        delete []temp->hint;
+    temp->hint = NULL;
+    temp->hint = new char[strlen(hint) + 1];
+    strcpy(temp->hint, hint);
+
     //TODO
     //!Remove the statement below for cout tempkey
-    std::cout << "Hash Key: " << tempKey << "\n"; 
+    std::cout << "Hash Key: " << tempKey << "\n";
+
     temp->next = hash_table[tempKey];
     hash_table[tempKey] = temp;
     delete temp;
     return 1;
 }
 
-int table::retrieve(char *name_to_find, entry &found) const
+int table::retrieve(char *name_to_find) const
 {
     int index = hash_function(name_to_find);
-    bool success = false;
+    //bool success = false;
     node *current = hash_table[index];
-    entry hEntry;
-    queue hQueue;
-    int counter = 0;
-
-    while (current && !success && counter <=10)
+    if (!current)
     {
+        delete current;
+        current = NULL;
+        return 0;
+    }
+    //entry hEntry;
+    //queue hQueue;
+    cout << "\n\n";
+    cout << "\nItem: " << current->name;
+    cout << "\nLocation: " << current->location;
+    cout << "\nHint: " << current->hint;
+    cout << "\n\n";
         //success = current->hEntry.retrieve(name_to_find, found);
+        /*
         if (current->hEntry.retrieve(name_to_find, found) == 1)
         {
             if (hQueue.enqueue(hEntry) == 1)
@@ -130,23 +156,24 @@ int table::retrieve(char *name_to_find, entry &found) const
             }
         }
         current = current->next;
-    }
-    return success;
+        */
+    return 1;
 }
 
 int table::hash_function(char *key) const
 {
     int i = 0;
-    int charStar_to_int = 0;
+    int charValue = 0;
+    int kSize = strlen(key) - 1;
     
-    while (i <= 6)
+    while (i < kSize)
     {
-        charStar_to_int = (key[i] - '0') + (charStar_to_int * 10);
+        charValue = (key[i] - '0') + (charValue * 10);
         ++i;
     }
 
     //TODO
     //!Remove the cout charStar_to_int below
-    std::cout << "Char* to Int: " << charStar_to_int << "\n";
-    return (charStar_to_int % 6151);
+    std::cout << "Char* to Int: " << charValue << "\n";
+    return (abs(charValue) % 6151);
 }

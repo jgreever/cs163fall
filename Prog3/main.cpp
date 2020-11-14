@@ -5,29 +5,34 @@ int main()
     table aTable;
     entry anEntry;
     queue aQueue;
-    char name[100];
-    char location[300];
-    char hint[300];
+    char aName[100];
+    //char aLocation[300];
+    //char aHint[300];
 
     std::cout << "\nLoading hash table from file...\n";
     if (aTable.load_from_file() == true)
         std::cout << "\nHash Table loaded sucessfully!\n";
     else
         std::cout << "\nHash Table failed to load...\n";
-    
+
+    //TODO
+    //!Remove below code, used for debugging/testing 
+    std::cout << "\nEnter the name to search for: ";
+    std::cin.get(aName, 100, '\n');
+    aTable.retrieve(aName);
     /*
     std::cout << "\n";
     std::cout << "Name: ";
-    std::cin.get(name, 100, '\n');
+    std::cin.get(aName, 100, '\n');
     std::cin.ignore(100, '\n');
     std::cout << "Location: ";
-    std::cin.get(location, 300, '\n');
+    std::cin.get(aLocation, 300, '\n');
     std::cin.ignore(100, '\n');
     std::cout << "Hint: ";
-    std::cin.get(hint, 300, '\n');
+    std::cin.get(aHint, 300, '\n');
     std::cin.ignore(100, '\n');
     
-    anEntry.create_entry(name, location, hint);
+    anEntry.create_entry(aName, aLocation, aHint);
     anEntry.display();
     std::cout << "\nAn entry created and displayed.\n";
 
@@ -39,16 +44,16 @@ int main()
     
     std::cout << "\n";
     std::cout << "Name: ";
-    std::cin.get(name, 100, '\n');
+    std::cin.get(aName, 100, '\n');
     std::cin.ignore(100, '\n');
     std::cout << "Location: ";
-    std::cin.get(location, 300, '\n');
+    std::cin.get(aLocation, 300, '\n');
     std::cin.ignore(100, '\n');
     std::cout << "Hint: ";
-    std::cin.get(hint, 300, '\n');
+    std::cin.get(aHint, 300, '\n');
     std::cin.ignore(100, '\n');
     
-    anEntry.create_entry(name, location, hint);
+    anEntry.create_entry(aName, aLocation, aHint);
     aQueue.enqueue(anEntry);
     aQueue.display();
     std::cout << "\nA queue entry was created and displayed.\n";
