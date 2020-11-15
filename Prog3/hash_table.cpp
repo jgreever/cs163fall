@@ -134,6 +134,8 @@ int table::retrieve(char *name_to_find) const
     int index = hash_function(name_to_find);
     entry tEntry;
     node *temp = hash_table[index];
+    if (temp == NULL)
+        return 0;
     temp->tEntry.retrieve(name_to_find, tEntry);
     return 1;
 }

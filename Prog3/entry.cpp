@@ -46,7 +46,7 @@ int entry::display()
 
 int entry::retrieve(char *search_name, entry &found)
 {
-  if (!name || !search_name) return 0;
+  //if (!name || !search_name) return 0;
 
   if (!strcmp(name, search_name)) 
   {
