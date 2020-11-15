@@ -7,7 +7,7 @@ queue::queue()
 
 queue::~queue()
 {
-    if (!rear)
+    if (rear)
         queue::dequeue();
 }
 
@@ -18,16 +18,16 @@ int queue::enqueue(const entry &to_add)
         rear = new qNode;
         rear->qEntry.create_entry(to_add);
         rear->next = rear;
+        return 1;
     }
-    else
-    {
-        qNode *temp = new qNode;
-        rear->qEntry.create_entry(to_add);
-        temp = rear->next;
-        rear->next = new qNode;
-        rear = rear->next;
-        rear->next = temp;
-    }
+    qNode *temp = new qNode;
+    rear->qEntry.create_entry(to_add);
+    temp->next = rear->next;
+    rear->next = temp;
+    rear = temp;
+    //rear->next = new qNode;
+    //rear = rear->next;
+    //rear->next = temp;
     return 1;
 }
 

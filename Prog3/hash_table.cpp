@@ -99,6 +99,10 @@ int table::retrieve(char *name_to_find) const
     if (temp == NULL)
         return 0;
     temp->tEntry.retrieve(name_to_find, tEntry);
+    temp->tEntry.create_entry(tEntry);
+    queue qEntry; 
+    qEntry.enqueue(tEntry);
+    qEntry.display();
     return 1;
 }
 

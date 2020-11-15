@@ -7,18 +7,24 @@ entry::entry()
 
 entry::~entry()
 {
-  if (name) delete[] name;
-  if (location) delete[] location;
-  if (hint) delete[] hint;
+  if (name)
+    delete[] name;
+  if (location)
+    delete[] location;
+  if (hint)
+    delete[] hint;
   name = location = hint = NULL;
 }
 
 int entry::create_entry(char *aname, char *alocation, char *ahint)
 {
-  if (name) delete[] name;
-  if (location) delete[] location;
-  if (hint) delete[] hint;
-  name = location = hint = NULL;
+  if (name)
+    delete[] name;
+  if (location)
+    delete[] location;
+  if (hint)
+    delete[] hint;
+  //name = location = hint = NULL;
   name = new char[strlen(aname) + 1];
   strcpy(name, aname);
   location = new char[strlen(alocation) + 1];
@@ -49,6 +55,7 @@ int entry::retrieve(char *search_name, entry &found)
   if (!strcmp(name, search_name)) 
   {
     display();
+    found.create_entry(name, location, hint);
     return 1;
   }
   else
