@@ -8,7 +8,7 @@ queue::queue()
 
 queue::~queue()
 {
-    /*
+    
     qNode *temp;
     if (rear == rear->next)
     {
@@ -22,9 +22,10 @@ queue::~queue()
         delete temp;
     }
     temp = NULL;
-    */
-    if (rear != NULL)
-        queue::dequeue();
+    
+   
+    //if (rear != NULL)
+    //    queue::dequeue();
 }
 
 int queue::enqueue(char *aName)
@@ -67,6 +68,6 @@ int queue::display()
 {
     if (!rear)
         return 0;
-    rear->anEntry.display();
+    rear->anEntry.display(1);
     return 1;
 }

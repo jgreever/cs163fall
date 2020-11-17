@@ -99,7 +99,7 @@ int table::retrieve(char *name_to_find)
     node *temp = hash_table[index];
     if (temp == NULL)
         return 0;
-    temp->anEntry.display();
+    temp->anEntry.display(2);
     return 1;
 }
 

@@ -10,10 +10,10 @@ public:
     entry();
     ~entry();
     int create_entry(char *name, char *location, char *hint, int choice);
-    int display();
+    int display(int userChoice);
 
 private:
-    char *aName;
+    //char *aName;
     char *name;
     char *location;
     char *hint;

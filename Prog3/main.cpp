@@ -56,14 +56,27 @@ int main()
                 break;
 
             case 3:
-                cout << "\nLet's search and add an item to our list.\n";
-                cout << "Please enter the name of the item to search and add:\n";
+                cout << "\nLet's search and add an item to our list.";
+                cout << "\nPlease enter the name of the item to search and add:\n";
                 cin.get(aName, 100, '\n');
                 cin.ignore(100, '\n');
                 if (mainTable->retrieve(aName) == 1)
                 {
-                    mainQueue->enqueue(aName);
-                    cout << "\nItem " << aName << " found and added to the list.\n";
+                    cout << "\n\nWould you like to add the item to the list?";
+                    cout << "\n1 for yes, 0 for no: ";
+                    int yesno = -1;
+                    cin >> yesno;
+                    cin.ignore(100, '\n');
+                    if (yesno == 1)
+                    {
+                        mainQueue->enqueue(aName);
+                        cout << "\nItem " << aName << " found and added to the list.\n";
+                    }
+                    else if (yesno == 0)
+                    {
+                        cout << aName << " was found but not added to the list.\n";
+                    }
+                    
                 }
                 else
                     cout << "\nItem " << aName << " not found in the list. Try again.\n";

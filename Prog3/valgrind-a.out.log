@@ -1,0 +1,35 @@
+==397729== Memcheck, a memory error detector
+==397729== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==397729== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==397729== Command: ./a.out
+==397729== Parent PID: 393531
+==397729== 
+==397729== 
+==397729== HEAP SUMMARY:
+==397729==     in use at exit: 310 bytes in 13 blocks
+==397729==   total heap usage: 430 allocs, 417 frees, 190,627 bytes allocated
+==397729== 
+==397729== 54 bytes in 5 blocks are indirectly lost in loss record 1 of 3
+==397729==    at 0x483C583: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==397729==    by 0x10959D: entry::create_entry(char*, char*, char*, int) (entry.cpp:35)
+==397729==    by 0x10AB71: queue::enqueue(char*) (queue.cpp:34)
+==397729==    by 0x10A6E3: main (main.cpp:72)
+==397729== 
+==397729== 96 bytes in 3 blocks are indirectly lost in loss record 2 of 3
+==397729==    at 0x483BE63: operator new(unsigned long) (vg_replace_malloc.c:344)
+==397729==    by 0x10ABBD: queue::enqueue(char*) (queue.cpp:45)
+==397729==    by 0x10A6E3: main (main.cpp:72)
+==397729== 
+==397729== 310 (160 direct, 150 indirect) bytes in 5 blocks are definitely lost in loss record 3 of 3
+==397729==    at 0x483BE63: operator new(unsigned long) (vg_replace_malloc.c:344)
+==397729==    by 0x10AB42: queue::enqueue(char*) (queue.cpp:33)
+==397729==    by 0x10A6E3: main (main.cpp:72)
+==397729== 
+==397729== LEAK SUMMARY:
+==397729==    definitely lost: 160 bytes in 5 blocks
+==397729==    indirectly lost: 150 bytes in 8 blocks
+==397729==      possibly lost: 0 bytes in 0 blocks
+==397729==    still reachable: 0 bytes in 0 blocks
+==397729==         suppressed: 0 bytes in 0 blocks
+==397729== 
+==397729== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
