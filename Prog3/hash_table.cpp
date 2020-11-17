@@ -87,7 +87,7 @@ int table::insert(char *aName, char *aLocation, char *aHint)
 {
     int tempKey = hash_function(aName);
     node *temp = new node();
-    temp->anEntry.create_entry(aName, aLocation, aHint);
+    temp->anEntry.create_entry(aName, aLocation, aHint, 2);
     temp->next = hash_table[tempKey];
     hash_table[tempKey] = temp;
     return 1;

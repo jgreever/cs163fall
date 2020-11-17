@@ -9,10 +9,8 @@ class entry
 public:
     entry();
     ~entry();
-    int create_entry(char *name, char *location, char *hint);
-    int create_qEntry(char *aName);
+    int create_entry(char *name, char *location, char *hint, int choice);
     int display();
-    int retrieve(char *search_name, entry &found);
 
 private:
     char *aName;

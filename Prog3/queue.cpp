@@ -8,15 +8,29 @@ queue::queue()
 
 queue::~queue()
 {
-    if (rear)
+    /*
+    qNode *temp;
+    if (rear == rear->next)
+    {
+        delete rear;
+        rear = NULL;
+    }
+    else if (rear != NULL)
+    {
+        temp = rear;
+        rear = rear->next;
+        delete temp;
+    }
+    temp = NULL;
+    */
+    if (rear != NULL)
         queue::dequeue();
 }
 
 int queue::enqueue(char *aName)
 {
-    qNode *temp = new qNode();
-    temp->anEntry.create_qEntry(aName);
-    temp->next = NULL;
+    qNode *temp = new qNode;
+    temp->anEntry.create_entry(aName, NULL, NULL, 1);
 
     if (!rear)
     {
@@ -24,28 +38,28 @@ int queue::enqueue(char *aName)
         rear->next = rear;
         return 1;
     }
-    temp = rear->next;
-    rear->next = new qNode();
-    rear = rear->next;
-    rear->next = temp;
+    else
+    {    
+        temp = rear->next;
+        rear->next = new qNode;
+        rear = rear->next;
+        rear->next = temp;
+    }
     return 1;
 }
 
 int queue::dequeue()
 {
-    if (!rear)
+    if (rear == NULL)
         return 0;
     if (rear->next == rear)
     {
         delete rear;
         rear = NULL;
     }
-    else
-    {
-        qNode *temp = rear->next;
-        rear->next = temp->next;
-        delete temp;
-    }
+    qNode *temp = rear->next->next;
+    delete rear->next;
+    rear->next = temp;
     return 1;
 }
 

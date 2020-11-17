@@ -3,14 +3,11 @@ using namespace std;
 
 int main()
 {
-    entry anEntry;
     table *mainTable = new table();
     queue *mainQueue = new queue();
-    char aName[100];
-    char aLocation[300];
-    char aHint[300];
 
     int choice = -1;
+    
     do
     {
         cout << "\n\n********************\n";
@@ -29,6 +26,10 @@ int main()
         cin >> choice;
         cin.ignore(100, '\n');
     
+        char aName[100] = {0};
+        char aLocation[300] = {0};
+        char aHint[300] = {0};
+
         switch(choice)
         {
             case 1:
@@ -71,13 +72,17 @@ int main()
             case 4:
                 cout << "\nPlease enter the name of the item to view all information for:\n";
                 cin.get(aName, 100, '\n');
+                cin.clear();
                 cin.ignore(100, '\n');
                 cout << "\nShowing all information for " << aName << "\n";
-                mainTable->retrieve(aName);
+                if (mainTable->retrieve(aName) == 1)
+                    cout << "\nSuccess!\n";
+                else
+                    cout << "\nNo item found by that name. Try again.\n";
                 break;
 
             case 5:
-                cout << "\nRemoving " << aName << " from the list.\n";
+                cout << "\nRemoving an item from the list.\n";
                 mainQueue->display();
                 if (mainQueue->dequeue() == 1)
                     cout << "\nEntry has been removed.\n";
@@ -96,10 +101,11 @@ int main()
 
             default:
                 cout << "\nInvalid choice. Please try again.\n";
+                cin.clear();
                 break;
-
         }
     } while (choice != 0);
-     
+    delete mainQueue;
+    delete mainTable;
     return 0;
 }
