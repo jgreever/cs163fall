@@ -6,16 +6,17 @@
 
 class entry
 {
-    public:
-        entry();
-        ~entry();
-        int create_entry(char *name, char *location, char *hint);
-        int display();
-        int create_entry(const entry &anEntry);
-        int retrieve(char *search_name, entry &found);
+public:
+    entry();
+    ~entry();
+    int create_entry(char *name, char *location, char *hint);
+    int create_qEntry(char *aName);
+    int display();
+    int retrieve(char *search_name, entry &found);
 
-    private:
-        char *name;
-        char *location;
-        char *hint;
+private:
+    char *aName;
+    char *name;
+    char *location;
+    char *hint;
 };

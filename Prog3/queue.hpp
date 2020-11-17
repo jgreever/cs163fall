@@ -2,21 +2,19 @@
 
 struct qNode
 {
-    entry qEntry;
+    entry anEntry;
     qNode *next;
 };
 
 class queue
 {
-    public:
-        queue();
-        ~queue();
-        int display();
-        int peek(entry &to_peek);
-        int enqueue(const entry &to_add);
-        int dequeue();
+public:
+    queue();
+    ~queue();
+    int display();
+    int enqueue(char *aName);
+    int dequeue();
 
-    private:
-        qNode *rear;
-
+private:
+    qNode *rear;
 };
