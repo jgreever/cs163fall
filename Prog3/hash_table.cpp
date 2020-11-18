@@ -14,8 +14,8 @@ table::table(int size)
 
 table::~table()
 {
-    node *temp = NULL;
-    node *temp_next = NULL;
+    node *temp;
+    node *temp_next;
     for (int i = 0; i < hash_table_size; ++i)
     {
         if (hash_table[i])
@@ -56,7 +56,7 @@ bool table::load_from_file()
         strcpy(name, tName);
         strcpy(location, tLocation);
         strcpy(hint, tHint);
-        insert(name, location, hint);
+        table::insert(name, location, hint);
     }
 
     return true;
@@ -71,7 +71,7 @@ bool table::clear_table()
         if (hash_table[i])
         {
             temp = hash_table[i];
-            while (temp != NULL)
+            while (temp)
             {
                 temp_next = temp->next;
                 delete temp;
@@ -87,7 +87,7 @@ int table::insert(char *aName, char *aLocation, char *aHint)
 {
     int tempKey = hash_function(aName);
     node *temp = new node();
-    temp->anEntry.create_entry(aName, aLocation, aHint, 2);
+    temp->anEntry.create_entry(aName, aLocation, aHint);
     temp->next = hash_table[tempKey];
     hash_table[tempKey] = temp;
     return 1;

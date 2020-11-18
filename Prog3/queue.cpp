@@ -8,44 +8,46 @@ queue::queue()
 
 queue::~queue()
 {
-    
-    qNode *temp;
-    if (rear == rear->next)
+    //while (rear != NULL)
+    //    queue::dequeue();
+
+    qNode *temp = NULL;
+    if (rear == NULL)
     {
         delete rear;
         rear = NULL;
     }
-    else if (rear != NULL)
+    else if (rear->next == rear)
     {
-        temp = rear;
-        rear = rear->next;
-        delete temp;
+        delete rear;
+        rear = NULL;
     }
-    temp = NULL;
-    
-   
-    //if (rear != NULL)
-    //    queue::dequeue();
+    else
+    {
+        temp = rear->next;
+        delete rear;
+        rear = temp;
+    }
 }
 
 int queue::enqueue(char *aName)
 {
+    char *tName = new char[strlen(aName) + 1];
+    strcpy(tName, aName);
     qNode *temp = new qNode;
-    temp->anEntry.create_entry(aName, NULL, NULL, 1);
+    temp->anEntry.create_entry(tName);
+    delete[] tName;
 
-    if (!rear)
+    if (rear == NULL)
     {
         rear = temp;
         rear->next = rear;
         return 1;
     }
-    else
-    {    
-        temp = rear->next;
-        rear->next = new qNode;
-        rear = rear->next;
-        rear->next = temp;
-    }
+    temp->next = rear->next;
+    rear->next = new qNode; 
+    rear = rear->next;
+    rear->next = temp;
     return 1;
 }
 
@@ -55,12 +57,16 @@ int queue::dequeue()
         return 0;
     if (rear->next == rear)
     {
+        rear->next = NULL;
         delete rear;
         rear = NULL;
+        return 1;
     }
     qNode *temp = rear->next->next;
     delete rear->next;
     rear->next = temp;
+    delete temp;
+    //temp = NULL;
     return 1;
 }
 
@@ -68,6 +74,8 @@ int queue::display()
 {
     if (!rear)
         return 0;
-    rear->anEntry.display(1);
+    cout << "\nDEBUG OUTPUT: rear" << rear->anEntry.display(1);
+    cout << "\nDEBUG OUTPUT: rear->next: " << rear->next->anEntry.display(1);
+    cout << "\nDEBUG OUTPUT: rear->next->next: " << rear->next->next->anEntry.display(1);
     return 1;
 }

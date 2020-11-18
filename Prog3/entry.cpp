@@ -3,51 +3,48 @@ using namespace std;
 
 entry::entry()
 {
-    name = location = hint = NULL;
+    this->name = this->location = this->hint = NULL;
 }
 
 entry::~entry()
 {
-    //if (aName)
-    //    delete[] aName;
-    if (name)
-        delete[] name;
-    if (location)
-        delete[] location;
-    if (hint)
-        delete[] hint;
-    name = location = hint = NULL;
-}
-
-int entry::create_entry(char *aname, char *alocation, char *ahint, int choice)
-{
-    //if (this->aName)
-    //    delete[] this->aName;
     if (this->name)
         delete[] this->name;
     if (this->location)
         delete[] this->location;
     if (this->hint)
         delete[] this->hint;
-    
-    if (aname && choice == 1)
-    {
-        this->name = new char[strlen(aname) + 1];
-        strcpy(this->name, aname);
-        this->location = this->hint = NULL;
-        return 1;
-    }
-    else if (aname && choice == 2)
-    {
-        this->name = new char[strlen(aname) + 1];
-        strcpy(this->name, aname);
-        this->location = new char[strlen(alocation) + 1];
-        strcpy(this->location, alocation);
-        this->hint = new char[strlen(ahint) + 1];
-        strcpy(this->hint, ahint);
-        return 1;
-    }
-    return 0;
+    this->name = this->location = this->hint = NULL;
+}
+int entry::create_entry(const entry &to_add, int choice)
+{
+    return entry::create_entry(to_add.name, to_add.location, to_add.hint);
+}
+
+int entry::create_entry(char *aName)
+{
+    if (this->name)
+        delete[] this->name;
+    this->name = new char[strlen(aName) + 1];
+    location = hint = NULL;
+    strcpy(this->name, aName);
+    return 1;
+}
+int entry::create_entry(char *aname, char *alocation, char *ahint)
+{
+    if (this->name)
+        delete[] this->name;
+    if (this->location)
+        delete[] this->location;
+    if (this->hint)
+    delete[] this->hint;
+    this->name = new char[strlen(aname) + 1];
+    strcpy(this->name, aname);
+    this->location = new char[strlen(alocation) + 1];
+    strcpy(this->location, alocation);
+    this->hint = new char[strlen(ahint) + 1];
+    strcpy(this->hint, ahint);
+    return 1;
 }
 
 int entry::display(int userChoice)

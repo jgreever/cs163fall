@@ -5,8 +5,10 @@ int main()
 {
     table *mainTable = new table();
     queue *mainQueue = new queue();
-
-    int choice = -1;
+    int choice = 0;
+    char aName[100];
+    char aLocation[300];
+    char aHint[300];
     
     do
     {
@@ -21,14 +23,10 @@ int main()
         cout << "4. View all information about an item\n";
         cout << "5. Remove matching item\n";
         cout << "6. Remove all items\n";
-        cout << "0. Exit the program\n";
+        cout << "7. Exit the program\n";
         cout << "********************\n\n";
         cin >> choice;
         cin.ignore(100, '\n');
-    
-        char aName[100] = {0};
-        char aLocation[300] = {0};
-        char aHint[300] = {0};
 
         switch(choice)
         {
@@ -76,7 +74,7 @@ int main()
                     {
                         cout << aName << " was found but not added to the list.\n";
                     }
-                    
+                    mainQueue->display(); 
                 }
                 else
                     cout << "\nItem " << aName << " not found in the list. Try again.\n";
@@ -85,7 +83,6 @@ int main()
             case 4:
                 cout << "\nPlease enter the name of the item to view all information for:\n";
                 cin.get(aName, 100, '\n');
-                cin.clear();
                 cin.ignore(100, '\n');
                 cout << "\nShowing all information for " << aName << "\n";
                 if (mainTable->retrieve(aName) == 1)
@@ -108,17 +105,23 @@ int main()
                 mainTable->clear_table();
                 break;
 
-            case 0:
+            case 7:
                 cout << "\nExiting program. Thank you!\n";
                 break;
 
             default:
                 cout << "\nInvalid choice. Please try again.\n";
-                cin.clear();
-                break;
+                continue;
         }
-    } while (choice != 0);
-    delete mainQueue;
-    delete mainTable;
+    } while (choice != 7);
+
+    //mainTable->~table();
+    //mainQueue->~queue();
+
+    if (mainTable)
+        delete mainTable;
+    if (mainQueue)
+        delete mainQueue;
+
     return 0;
 }
