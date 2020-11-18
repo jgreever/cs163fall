@@ -8,9 +8,19 @@ queue::queue()
 
 queue::~queue()
 {
+  if (!rear) return;
+  qNode *current = rear->next;
+  rear->next = NULL;
+  while (current)
+  {
+    rear = current->next;
+    delete current;
+    current = rear;
+  }
     //while (rear != NULL)
     //    queue::dequeue();
 
+    /*
     qNode *temp = NULL;
     if (rear == NULL)
     {
@@ -28,6 +38,7 @@ queue::~queue()
         delete rear;
         rear = temp;
     }
+    */
 }
 
 int queue::enqueue(char *aName)
