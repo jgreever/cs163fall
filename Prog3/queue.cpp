@@ -1,3 +1,31 @@
+/* queue.cpp
+ * 
+ * Justin Greever
+ * CS163 - Program 3
+ * 11/9/2020
+ * 
+ * Program 3 - Scavenger Hunt!
+ *
+ * The queue class takes information from the hash table via
+ * the entry class, if requested, and stores it into the queue
+ * that is created. The only input value accepted from the user
+ * or main is:
+ *  char *name; (the item name)
+ * 
+ * Our private data is:
+ *  qNode *rear; (our rear entry for our Queue)
+ * 
+ * This class manages our CLL for enqueuing at the rear and
+ * adding at the front. The queue only holds the items name
+ * that the user adds to the Scavenger hunt list. If information
+ * is needed about the item entry (location, hint), the user
+ * will pass a name to the hash function class, and if a match
+ * is found, will alert the user and retrieve the information
+ * about the item. This is either handed to the client for 
+ * displaying, or passed into this Queue class to be stored
+ * in our list.
+ * 
+ */
 #include "hash_table.hpp"
 using namespace std;
 
@@ -85,8 +113,13 @@ int queue::display()
 {
     if (!rear)
         return 0;
-    cout << "\nDEBUG OUTPUT: rear" << rear->anEntry.display(1);
-    cout << "\nDEBUG OUTPUT: rear->next: " << rear->next->anEntry.display(1);
-    cout << "\nDEBUG OUTPUT: rear->next->next: " << rear->next->next->anEntry.display(1);
+    cout << "\nHere is the item you are looking for currently:\n" 
+         << rear->anEntry.display(1); //we use a 1 here so the entry
+                                      //class is able to display from
+                                      //the queue and not the hash table
+                                      
+    //cout << "\nDEBUG OUTPUT: rear" << rear->anEntry.display(1);
+    //cout << "\nDEBUG OUTPUT: rear->next: " << rear->next->anEntry.display(1);
+    //cout << "\nDEBUG OUTPUT: rear->next->next: " << rear->next->next->anEntry.display(1);
     return 1;
 }

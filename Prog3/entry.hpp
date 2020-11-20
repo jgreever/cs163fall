@@ -1,3 +1,12 @@
+/* entry.hpp
+ * 
+ * Justin Greever
+ * CS163 - Program 3
+ * 11/9/2020
+ * 
+ * Program 3 - Scavenger Hunt!
+ * 
+ */
 #include <cctype>
 #include <cstring>
 #include <iostream>

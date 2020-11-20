@@ -1,11 +1,51 @@
+/* main.cpp
+ * 
+ * Justin Greever
+ * CS163 - Program 3
+ * 11/9/2020
+ * 
+ * Program 3 - Scavenger Hunt!
+ * 
+ * This program is designed to teach me how to use hash tables,
+ * CLL, and queues.
+ * 
+ * The user is able to load the hash_table from a file, manually
+ * add entries to the hash table, lookup an item in the hash table
+ * and add it to the queue, search for an item in the queue and 
+ * display information about it, remove an item from the queue,
+ * and remove all entries from the hash table.
+ * 
+ * If the user chooses to add items to the hash table from the file
+ * and wants to search for entries to add to the queue, here are some
+ * items that can be used so you don't have to look at the text file.
+ *  Scary ghost
+ *  Gray dog
+ *  Cursed doll
+ *  White toad
+ *  New scarecrow
+ *  Ugly vampire
+ *  Possessed crow
+ *  White crow
+ *  Green toad
+ *  Big pumpkin
+ * 
+ * This program uses a Queue ADT that holds a CLL Data Structure
+ * that holds an item name.
+ * Our Hash Table ADT will hold all information about the item:
+ *  Item name, Location, Item Location Hint
+ * 
+ * Each file has an explanation of its use. This file is for the
+ * user to be able to test various functions of the program.
+ * 
+ */
 #include "hash_table.hpp"
 using namespace std;
 
 int main()
 {
-    table *mainTable = new table();
-    queue *mainQueue = new queue();
-    int choice = 0;
+    table *mainTable = new table(); //creates a new table entry
+    queue *mainQueue = new queue(); //creates a new CLL queue
+    int choice = 0; //used for our menu's switch function
     char aName[100];
     char aLocation[300];
     char aHint[300];
@@ -15,14 +55,14 @@ int main()
         cout << "\n\n********************\n";
         cout << "Scavenger Hunt!\n";
         cout << "********************\n";
-        cout << " Main Menu\n";
+        cout << "\nMain Menu\n";
         cout << "--------------------\n";
         cout << "1. Load item list from file\n";
         cout << "2. Manually add an item\n";
         cout << "3. Search and add item to list\n";
         cout << "4. View all information about an item\n";
-        cout << "5. Remove matching item\n";
-        cout << "6. Remove all items\n";
+        cout << "5. Remove item that is found\n";
+        cout << "6. Remove all items from table\n";
         cout << "7. Exit the program\n";
         cout << "********************\n\n";
         cin >> choice;
@@ -118,6 +158,7 @@ int main()
     //mainTable->~table();
     //mainQueue->~queue();
 
+    //gotta delete these values or else we get memory leaks!!
     if (mainTable)
         delete mainTable;
     if (mainQueue)
