@@ -140,7 +140,7 @@ int bst::copy(node *&destination, node *source)
 
 int bst::display()
 {
-    return display(root, 1);
+    return display(root, 0);
 }
 
 int bst::display(node *root, int height)
@@ -156,7 +156,7 @@ int bst::display(node *root, int height)
             for (int i = 0; i < height; ++i)
                 cout << "       ";
         }
-        cout << root->data << "\n";
+        cout << root->data;
         display(root->left, height + 1);
     }
     return height;

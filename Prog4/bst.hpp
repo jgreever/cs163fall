@@ -25,6 +25,7 @@
 #include <cstring>
 #include <cctype>
 #include <cstdlib>
+#include <time.h>
 
 struct node
 {

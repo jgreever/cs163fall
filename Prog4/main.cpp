@@ -13,16 +13,16 @@ using namespace std;
 int main()
 {
     bst *mainBST = new bst;
-
+    srand(time(0));
     cout << "\n\nAdding data to the tree...\n";
-    mainBST->insert(22);
-    mainBST->insert(47);
-    mainBST->insert(12);
-    mainBST->insert(33);
-    mainBST->insert(55);
-    mainBST->insert(1);
-
+    for (int i = 0; i < 10; ++i)
+    {
+        int rng = rand() % 100;
+        cout << "\nDEBUG: " << rng << "\n";
+        mainBST->insert(rng);
+    }
     mainBST->display();
+    cout << "\n\nBST Height: " << mainBST->height() << "\n\n";
 
     if (mainBST)
         delete mainBST;
