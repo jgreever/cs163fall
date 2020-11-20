@@ -7,5 +7,4 @@
  * Media Management (using BSTs)
  *
  */
-
-
+#include "bst.hpp"
