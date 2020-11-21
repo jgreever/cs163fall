@@ -8,7 +8,6 @@
  *
  */
 #include "bst.hpp"
-using namespace std;
 
 int main()
 {
@@ -58,7 +57,9 @@ int main()
         cin.get(isNext, 100, '\n');
         cin.ignore(100, '\n');
         mainTable->insert(name, media, desc, length, isNext);
+        data = rand() % 100;
         mainBST->insert(mainTable, data);
+        mainBST->display();
     }
     
     if (mainBST)

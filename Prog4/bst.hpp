@@ -54,5 +54,5 @@ private:
     int height(node *root);
     int remove_all(node *&root);
     int copy(node *&destination, node *source);
-    int display(node *root, int level);
+    int display(node *root);
 };

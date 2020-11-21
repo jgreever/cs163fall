@@ -24,7 +24,6 @@
  * 
  */
 #include "bst.hpp"
-using namespace std;
 
 bst::bst()
 {
@@ -68,7 +67,7 @@ int bst::insert(node *&root, table *aTable, int data)
     if (!root)
     {
         root = new node;
-        table *temp = aTable;
+        //table *temp = aTable;
         root->data = data;
         root->bstTable.insert(aTable);
         root->left = root->right = NULL;
@@ -141,7 +140,6 @@ int bst::remove_all(node *&root)
 
 int bst::copy(const bst &to_copy)
 {
-    //TODO make sure to create the destination to be passed
     node *destination = new node;
     return copy(destination, to_copy.root);
 }
@@ -163,24 +161,15 @@ int bst::copy(node *&destination, node *source)
 
 int bst::display()
 {
-    return display(root, 0);
+    return display(root);
 }
 
-int bst::display(node *root, int height)
+int bst::display(node *root)
 {
-    if (root != NULL)
-    {
-        display(root->right, height + 1);
-        cout << endl;
-        if (root)
-            cout << "Root->:  ";
-        else
-        {
-            for (int i = 0; i < height; ++i)
-                cout << "       ";
-        }
-        cout << root->data;
-        display(root->left, height + 1);
-    }
-    return height;
+    if (!root) return 0;
+    cout << "\nData: ";
+    bst::display(root->left);
+    cout << root->data << "\t";
+    bst::display(root->right);
+    return 1;
 }

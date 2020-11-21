@@ -21,7 +21,6 @@
  * 
  */
 #include "table.hpp"
-using namespace std;
 
 table::table()
 {
@@ -73,16 +72,16 @@ bool table::insert(char *aClass, char *aName,
 
 bool table::display(void) const
 {
-    cout << "\n\nClass Name: " << this->aClass;
+    cout << "\nClass Name: " << this->aClass;
     cout << "\nMedia Name: " << this->aName;
     cout << "\nDescription: " << this->desc;
     cout << "\nLength: " << this->length;
     if (this->isNext)
-        cout << "\nNext to Watch: " << this->isNext;
+        cout << "\nNext to Watch: " << this->isNext << "\n";
     return true;
 }
 
-bool table::insert(table *&anEntry)
+bool table::insert(table *anEntry)
 {
     return table::insert(anEntry->aClass, anEntry->aName, 
                          anEntry->desc, anEntry->length,

@@ -12,6 +12,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <time.h>
+using namespace std;
 
 class table
 {
@@ -20,7 +21,7 @@ class table
         ~table();
         bool insert(char *aClass, char *aName,
                     char *desc, char *length, char *isNext);
-        bool insert(table *&anEntry);
+        bool insert(table *anEntry);
         bool display(void) const;
 
     private:
