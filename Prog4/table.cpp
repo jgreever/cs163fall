@@ -21,3 +21,70 @@
  * 
  */
 #include "table.hpp"
+using namespace std;
+
+table::table()
+{
+    aClass = aName = desc =
+    length = isNext = NULL;
+}
+
+table::~table()
+{
+    if (this->aClass)
+        delete[] this->aClass;
+    if (this->aName)
+        delete[] this->aName;
+    if (this->desc)
+        delete[] this->desc;
+    if (this->length)
+        delete[] this->length;
+    if (this->isNext)
+        delete[] this->isNext;
+    this->aClass = this->aName = this->desc = 
+    this->length = this->isNext = NULL;
+}
+
+bool table::insert(char *aClass, char *aName,
+                   char *desc, char *length, char *isNext)
+{
+    if (this->aClass)
+        delete[] this->aClass;
+    if (this->aName)
+        delete[] this->aName;
+    if (this->desc)
+        delete[] this->desc;
+    if (this->length)
+        delete[] this->length;
+    if (this->isNext)
+        delete[] this->isNext;
+    this->aClass = new char[strlen(aClass) + 1];
+    strcpy(this->aClass, aClass);
+    this->aName = new char[strlen(aName) + 1];
+    strcpy(this->aName, aName);    
+    this->desc = new char[strlen(desc) + 1];
+    strcpy(this->desc, desc);    
+    this->length = new char[strlen(length) + 1];
+    strcpy(this->length, length);    
+    this->isNext = new char[strlen(isNext) + 1];
+    strcpy(this->isNext, isNext);
+    return true;
+}
+
+bool table::display(void) const
+{
+    cout << "\n\nClass Name: " << this->aClass;
+    cout << "\nMedia Name: " << this->aName;
+    cout << "\nDescription: " << this->desc;
+    cout << "\nLength: " << this->length;
+    if (this->isNext)
+        cout << "\nNext to Watch: " << this->isNext;
+    return true;
+}
+
+bool table::insert(table *&anEntry)
+{
+    return table::insert(anEntry->aClass, anEntry->aName, 
+                         anEntry->desc, anEntry->length,
+                         anEntry->isNext);
+}

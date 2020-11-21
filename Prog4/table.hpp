@@ -7,4 +7,26 @@
  * Media Management (using BSTs)
  *
  */
-#include "bst.hpp"
+#include <iostream>
+#include <cstring>
+#include <cctype>
+#include <cstdlib>
+#include <time.h>
+
+class table
+{
+    public:
+        table();
+        ~table();
+        bool insert(char *aClass, char *aName,
+                    char *desc, char *length, char *isNext);
+        bool insert(table *&anEntry);
+        bool display(void) const;
+
+    private:
+        char *aClass;
+        char *aName;
+        char *desc;
+        char *length;
+        char *isNext;
+};

@@ -21,15 +21,12 @@
  *      int copy(const table &to_copy); / int copy(node *&destination, node *source);
  * 
  */
-#include <iostream>
-#include <cstring>
-#include <cctype>
-#include <cstdlib>
-#include <time.h>
+#include "table.hpp"
 
 struct node
 {
     int data;
+    table bstTable;
     node *left;
     node *right;
 };
@@ -40,6 +37,7 @@ public:
     bst();
     ~bst();
     int insert(int data);
+    int insert(table *&aTable, int data);
     int count();
     int sum();
     int height();
@@ -50,6 +48,7 @@ public:
 private:
     node *root;
     int insert(node *&root, int data);
+    int insert(node *&root, table *aTable, int data);
     int count(node *root);
     int sum(node *root);
     int height(node *root);

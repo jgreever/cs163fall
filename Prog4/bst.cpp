@@ -23,7 +23,7 @@
  *      int copy(const table &to_copy);
  * 
  */
-#include "table.hpp"
+#include "bst.hpp"
 using namespace std;
 
 bst::bst()
@@ -33,12 +33,18 @@ bst::bst()
 
 bst::~bst()
 {
-    remove_all(root);
+    bst::remove_all(root);
 }
 
 int bst::insert(int data)
 {
-    return insert(root, data);
+    return bst::insert(root, data);
+}
+
+int bst::insert(table *&aTable, int data)
+{
+    table *newTable = aTable;
+    return bst::insert(root, newTable, data);
 }
 
 int bst::insert(node *&root, int data)
@@ -51,10 +57,27 @@ int bst::insert(node *&root, int data)
         return 1;
     }
     if (data < root->data)
-        insert(root->left, data);
+        bst::insert(root->left, data);
     else
-        insert(root->right, data);
+        bst::insert(root->right, data);
     return 1;
+}
+
+int bst::insert(node *&root, table *aTable, int data)
+{
+    if (!root)
+    {
+        root = new node;
+        table *temp = aTable;
+        root->data = data;
+        root->bstTable.insert(aTable);
+        root->left = root->right = NULL;
+        return 1;
+    }
+    if (data < root->data)
+        bst::insert(root->left, aTable, data);
+    else
+        bst::insert(root->right, aTable, data);
 }
 
 int bst::count()
