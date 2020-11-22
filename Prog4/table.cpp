@@ -72,10 +72,14 @@ bool table::insert(char *aClass, char *aName,
 
 bool table::display(void) const
 {
-    cout << "\nClass Name: " << this->aClass;
-    cout << "\nMedia Name: " << this->aName;
-    cout << "\nDescription: " << this->desc;
-    cout << "\nLength: " << this->length;
+    if (this->aClass)
+        cout << "\nClass Name: " << this->aClass;
+    if (this->aName)
+        cout << "\nMedia Name: " << this->aName;
+    if (this->desc)
+        cout << "\nDescription: " << this->desc;
+    if (this->length)
+        cout << "\nLength: " << this->length;
     if (this->isNext)
         cout << "\nNext to Watch: " << this->isNext << "\n";
     return true;

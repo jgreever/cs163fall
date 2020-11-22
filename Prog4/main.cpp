@@ -41,11 +41,11 @@ int main()
         //cout << "\nDisplay Root Node: ";
         //mainBST->display();
         //cout << endl;
-        cout << root_node << ", ";
+        cout << root_node << "\t";
         for (int i = 0; i < 10; ++i)
         {
             int rng = rand() % 100;
-            cout << rng << ", ";
+            cout << rng << "\t";
             mainBST->insert(rng);
         }
         cout << "\n";
@@ -77,6 +77,7 @@ int main()
         mainTable->insert(name, media, desc, length, isNext);
         data = rand() % 100;
         mainBST->insert(mainTable, data);
+        cout << "\nData: ";
         mainBST->display();
     }
     

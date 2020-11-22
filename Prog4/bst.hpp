@@ -43,7 +43,7 @@ class bst
         int height();
         bool remove_all();
         bool copy(const bst &to_copy);
-        void display();
+        bool display();
 
     private:
         node *root;
@@ -55,5 +55,5 @@ class bst
         int height(node *root);
         bool remove_all(node *&root);
         int copy(node *&destination, node *source);
-        void display(node *root);
+        bool display(node *root);
 };

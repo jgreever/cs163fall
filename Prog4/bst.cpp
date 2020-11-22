@@ -163,21 +163,20 @@ int bst::copy(node *&destination, node *source)
     return (copy_nodes + 1);
 }
 
-void bst::display()
+bool bst::display()
 {
     return display(root);
 }
 
-void bst::display(node *root)
+bool bst::display(node *root)
 {
-    //cout << root->data << ", ";
-    if (root == NULL) return;
+    if (root == NULL) return false;
     if (root != NULL)
     {
-        //cout << root->data << ", ";
         bst::display(root->left);
-        cout << root->data << ", ";
+        cout << root->data << "\t";
+        root->bstTable.display();
         bst::display(root->right);
     }
-    return;
+    return true;
 }
