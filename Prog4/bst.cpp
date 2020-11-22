@@ -36,17 +36,18 @@ bst::~bst()
     bst::remove_all(root);
 }
 
+/*
 bool bst::insert(int data)
 {
     return bst::insert(root, data);
 }
-
-bool bst::insert(table *&aTable, int data)
+*/
+bool bst::insert(table *&aTable)
 {
     table *newTable = aTable;
-    return bst::insert(root, newTable, data);
+    return bst::insert(root, newTable);
 }
-
+/*
 bool bst::insert(node *&root, int data)
 {
     if (root == NULL)
@@ -64,22 +65,21 @@ bool bst::insert(node *&root, int data)
         return false;
     return true;
 }
-
-bool bst::insert(node *&root, table *aTable, int data)
+*/
+bool bst::insert(node *&root, table *aTable)
 {
     if (!root)
     {
         root = new node;
-        //table *temp = aTable;
-        root->data = data;
+        root->data = aTable->get_value();
         root->bstTable.insert(aTable);
         root->left = root->right = NULL;
         return true;
     }
     if (data < root->data)
-        bst::insert(root->left, aTable, data);
+        bst::insert(root->left, aTable);
     else
-        bst::insert(root->right, aTable, data);
+        bst::insert(root->right, aTable);
     return true;
 } 
 

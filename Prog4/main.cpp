@@ -14,15 +14,16 @@ int main()
     bst *mainBST = new bst;
     table *mainTable = new table;
     srand(time(0));
-    char choice[2];
-    int data = 0;
+    //char choice[2];
+    //int data = 0;
     char name[100];
     char media[100];
     char desc[300];
     char length[25];
     char isNext[100];
-    char rans[] = "R";
-    char eans[] = "A";
+    //char rans[] = "R";
+    //char eans[] = "A";
+    /*
     cout << "\n\nWould you like to add random int data\n";
     cout << "Or would you like to add an entry?\n";
     cout << "Enter 'R' for random, 'A' for entry: ";
@@ -54,6 +55,7 @@ int main()
     }
     else if (strcmp(eans, choice) == 0)
     {
+    */
         cout << "\nPlease enter the class name: ";
         cin.get(name, 100, '\n');
         cin.clear();
@@ -75,11 +77,10 @@ int main()
         cin.clear();
         cin.ignore(100, '\n');
         mainTable->insert(name, media, desc, length, isNext);
-        data = rand() % 100;
-        mainBST->insert(mainTable, data);
+        mainBST->insert(mainTable);
         cout << "\nData: ";
         mainBST->display();
-    }
+    //}
     
     if (mainBST)
         delete mainBST;

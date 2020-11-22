@@ -19,12 +19,15 @@ class table
     public:
         table();
         ~table();
+        int get_value();
         bool insert(char *aClass, char *aName,
                     char *desc, char *length, char *isNext);
         bool insert(table *anEntry);
         bool display(void) const;
 
     private:
+        int get_value(char *aName);
+        //bool insert(table *anEntry);
         char *aClass;
         char *aName;
         char *desc;

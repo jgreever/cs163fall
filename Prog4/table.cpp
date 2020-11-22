@@ -44,6 +44,20 @@ table::~table()
     this->length = this->isNext = NULL;
 }
 
+int table::get_value()
+{
+    return table::get_value(aName);
+}
+
+int table::get_value(char *aName)
+{
+    //TODO! Fix the line below
+    int value = *aName;
+    //TODO: remove the line below
+    cout << "\nValue for " << aName << " is: " << value << endl;
+    return value;
+}
+
 bool table::insert(char *aClass, char *aName,
                    char *desc, char *length, char *isNext)
 {

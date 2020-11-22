@@ -36,8 +36,8 @@ class bst
     public:
         bst();
         ~bst();
-        bool insert(int data);
-        bool insert(table *&aTable, int data);
+        //bool insert(int data);
+        bool insert(table *&aTable);
         int count();
         int sum();
         int height();
@@ -48,8 +48,8 @@ class bst
     private:
         node *root;
         int data;
-        bool insert(node *&root, int data);
-        bool insert(node *&root, table *aTable, int data);
+        //bool insert(node *&root, int data);
+        bool insert(node *&root, table *aTable);
         int count(node *root);
         int sum(node *root);
         int height(node *root);
