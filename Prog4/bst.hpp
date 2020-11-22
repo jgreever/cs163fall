@@ -33,26 +33,27 @@ struct node
 
 class bst
 {
-public:
-    bst();
-    ~bst();
-    int insert(int data);
-    int insert(table *&aTable, int data);
-    int count();
-    int sum();
-    int height();
-    int remove_all();
-    int copy(const bst &to_copy);
-    int display();
+    public:
+        bst();
+        ~bst();
+        bool insert(int data);
+        bool insert(table *&aTable, int data);
+        int count();
+        int sum();
+        int height();
+        bool remove_all();
+        bool copy(const bst &to_copy);
+        void display();
 
-private:
-    node *root;
-    int insert(node *&root, int data);
-    int insert(node *&root, table *aTable, int data);
-    int count(node *root);
-    int sum(node *root);
-    int height(node *root);
-    int remove_all(node *&root);
-    int copy(node *&destination, node *source);
-    int display(node *root);
+    private:
+        node *root;
+        int data;
+        bool insert(node *&root, int data);
+        bool insert(node *&root, table *aTable, int data);
+        int count(node *root);
+        int sum(node *root);
+        int height(node *root);
+        bool remove_all(node *&root);
+        int copy(node *&destination, node *source);
+        void display(node *root);
 };

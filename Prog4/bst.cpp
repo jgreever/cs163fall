@@ -28,6 +28,7 @@
 bst::bst()
 {
     root = NULL;
+    data = 0;
 }
 
 bst::~bst()
@@ -35,34 +36,36 @@ bst::~bst()
     bst::remove_all(root);
 }
 
-int bst::insert(int data)
+bool bst::insert(int data)
 {
     return bst::insert(root, data);
 }
 
-int bst::insert(table *&aTable, int data)
+bool bst::insert(table *&aTable, int data)
 {
     table *newTable = aTable;
     return bst::insert(root, newTable, data);
 }
 
-int bst::insert(node *&root, int data)
+bool bst::insert(node *&root, int data)
 {
-    if (!root)
+    if (root == NULL)
     {
         root = new node;
         root->data = data;
         root->left = root->right = NULL;
-        return 1;
+        return true;
     }
-    if (data < root->data)
+    else if (data < root->data)
         bst::insert(root->left, data);
-    else
+    else if (data > root->data)
         bst::insert(root->right, data);
-    return 1;
+    else
+        return false;
+    return true;
 }
 
-int bst::insert(node *&root, table *aTable, int data)
+bool bst::insert(node *&root, table *aTable, int data)
 {
     if (!root)
     {
@@ -71,13 +74,14 @@ int bst::insert(node *&root, table *aTable, int data)
         root->data = data;
         root->bstTable.insert(aTable);
         root->left = root->right = NULL;
-        return 1;
+        return true;
     }
     if (data < root->data)
         bst::insert(root->left, aTable, data);
     else
         bst::insert(root->right, aTable, data);
-}
+    return true;
+} 
 
 int bst::count()
 {
@@ -118,27 +122,27 @@ int bst::height(node *root)
         return 0;
     int left_height = height(root->left);
     int right_height = height(root->right);
-    int total_height = max(left_height, right_height) + 1;
-    return total_height;
+    int total_height = max(left_height, right_height);
+    return (total_height + 1);
 }
 
-int bst::remove_all()
+bool bst::remove_all()
 {
     return remove_all(root);
 }
 
-int bst::remove_all(node *&root)
+bool bst::remove_all(node *&root)
 {
     if (!root)
-        return 0;
+        return false;
     remove_all(root->left);
     remove_all(root->right);
     delete root;
     root = NULL;
-    return 1;
+    return true;
 }
 
-int bst::copy(const bst &to_copy)
+bool bst::copy(const bst &to_copy)
 {
     node *destination = new node;
     return copy(destination, to_copy.root);
@@ -149,27 +153,31 @@ int bst::copy(node *&destination, node *source)
     if (!source)
     {
         destination = NULL;
-        return 0;
+        return false;
     }
     destination = new node;
     destination->data = source->data;
     destination->left = destination->right = NULL;
     int copy_nodes = copy(destination->left, source->left);
     copy_nodes += copy(destination->right, source->right);
-    return copy_nodes + 1;
+    return (copy_nodes + 1);
 }
 
-int bst::display()
+void bst::display()
 {
     return display(root);
 }
 
-int bst::display(node *root)
+void bst::display(node *root)
 {
-    if (!root) return 0;
-    cout << "\nData: ";
-    bst::display(root->left);
-    cout << root->data << "\t";
-    bst::display(root->right);
-    return 1;
+    //cout << root->data << ", ";
+    if (root == NULL) return;
+    if (root != NULL)
+    {
+        //cout << root->data << ", ";
+        bst::display(root->left);
+        cout << root->data << ", ";
+        bst::display(root->right);
+    }
+    return;
 }
