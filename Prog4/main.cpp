@@ -12,8 +12,8 @@
 int main()
 {
     bst *mainBST = new bst;
-    table *mainTable = new table;
-    srand(time(0));
+    //entry *mainEntry = new entry;
+    //srand(time(0));
     //char choice[2];
     //int data = 0;
     char name[100];
@@ -76,16 +76,16 @@ int main()
         cin.get(isNext, 100, '\n');
         cin.clear();
         cin.ignore(100, '\n');
-        mainTable->insert(name, media, desc, length, isNext);
-        mainBST->insert(mainTable);
+        mainBST->insert(name, media, desc, length, isNext);
+        //mainBST->insert(mainEntry);
         cout << "\nData: ";
         mainBST->display();
     //}
     
     if (mainBST)
         delete mainBST;
-    if (mainTable)
-        delete mainTable;
+    //if (mainEntry)
+    //    delete mainEntry;
 
     return 1;
 }

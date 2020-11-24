@@ -28,7 +28,9 @@
 bst::bst()
 {
     root = NULL;
-    data = 0;
+    className = mediaName = description = NULL;
+    mediaLength = watchNext = NULL;
+    //data = 0;
 }
 
 bst::~bst()
@@ -42,10 +44,30 @@ bool bst::insert(int data)
     return bst::insert(root, data);
 }
 */
-bool bst::insert(table *&aTable)
+bool bst::insert(char *name, char *media, char *desc,
+                 char *length, char *isNext)
 {
-    table *newTable = aTable;
-    return bst::insert(root, newTable);
+    if (this->className)
+        delete this->className;
+    if (this->mediaName)
+        delete this->mediaName;
+    if (this->description)
+        delete this->description;
+    if (this->mediaLength)
+        delete this->mediaLength;
+    if (this->watchNext)
+        delete this->watchNext;
+    this->className = new char[strlen(name) + 1];
+    strcpy(this->className, name);
+    this->mediaName = new char[strlen(media) + 1];
+    strcpy(this->mediaName, media);
+    this->description = new char[strlen(desc) + 1];
+    strcpy(this->description, desc);
+    this->mediaLength = new char[strlen(length) + 1];
+    strcpy(this->mediaLength, length);
+    this->watchNext = new char[strlen(isNext) + 1];
+    strcpy(this->watchNext, isNext);
+    return bst::insert(root, this);
 }
 /*
 bool bst::insert(node *&root, int data)
@@ -66,22 +88,22 @@ bool bst::insert(node *&root, int data)
     return true;
 }
 */
-bool bst::insert(node *&root, table *aTable)
+bool bst::insert(node *&root, bst *anEntry)
 {
-    if (!root)
-    {
         root = new node;
-        root->data = aTable->get_value();
-        root->bstTable.insert(aTable);
+        root->anEntry = anEntry;
+        //root->data = aTable->get_value();
+        //root->bstTable.insert(aTable);
         root->left = root->right = NULL;
         return true;
-    }
+    /*()
     if (data < root->data)
         bst::insert(root->left, aTable);
     else
         bst::insert(root->right, aTable);
     return true;
-} 
+    */
+}
 
 int bst::count()
 {
@@ -97,7 +119,7 @@ int bst::count(node *root)
     int count_total = count(root->left) + count(root->right);
     return count_total;
 }
-
+/*
 int bst::sum()
 {
     return sum(root);
@@ -108,9 +130,9 @@ int bst::sum(node *root)
     if (!root)
         return 0;
     int sum_total = sum(root->left) + sum(root->right);
-    return sum_total + root->data;
+    return sum_total; //+ root->data;
 }
-
+*/
 int bst::height()
 {
     return height(root);
@@ -137,6 +159,8 @@ bool bst::remove_all(node *&root)
         return false;
     remove_all(root->left);
     remove_all(root->right);
+    delete[] className; delete[] mediaName; delete[] description;
+    delete[] mediaLength; delete[] watchNext;
     delete root;
     root = NULL;
     return true;
@@ -156,7 +180,7 @@ int bst::copy(node *&destination, node *source)
         return false;
     }
     destination = new node;
-    destination->data = source->data;
+    destination->anEntry = source->anEntry;
     destination->left = destination->right = NULL;
     int copy_nodes = copy(destination->left, source->left);
     copy_nodes += copy(destination->right, source->right);
@@ -174,9 +198,20 @@ bool bst::display(node *root)
     if (root != NULL)
     {
         bst::display(root->left);
-        cout << root->data << "\t";
-        root->bstTable.display();
+        bst::displayRecursive(root);
+        //cout << root->data << "\t";
+        //root->bstTable.display();
         bst::display(root->right);
     }
+    return true;
+}
+
+bool bst::displayRecursive(node *root)
+{
+    cout << "\nClass Name: " << root->anEntry->className;
+    cout << "\nMedia Name: " << root->anEntry->className;
+    cout << "\nDescription: " << root->anEntry->description;
+    cout << "\nMedia Length: " << root->anEntry->mediaLength;
+    cout << "\nWatch Next: " << root->anEntry->watchNext;
     return true;
 }
