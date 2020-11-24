@@ -30,7 +30,6 @@ bst::bst()
     root = NULL;
     className = mediaName = description = NULL;
     mediaLength = watchNext = NULL;
-    //data = 0;
 }
 
 bst::~bst()
@@ -38,12 +37,6 @@ bst::~bst()
     bst::remove_all(root);
 }
 
-/*
-bool bst::insert(int data)
-{
-    return bst::insert(root, data);
-}
-*/
 bool bst::insert(char *name, char *media, char *desc,
                  char *length, char *isNext)
 {
@@ -69,40 +62,13 @@ bool bst::insert(char *name, char *media, char *desc,
     strcpy(this->watchNext, isNext);
     return bst::insert(root, this);
 }
-/*
-bool bst::insert(node *&root, int data)
-{
-    if (root == NULL)
-    {
-        root = new node;
-        root->data = data;
-        root->left = root->right = NULL;
-        return true;
-    }
-    else if (data < root->data)
-        bst::insert(root->left, data);
-    else if (data > root->data)
-        bst::insert(root->right, data);
-    else
-        return false;
-    return true;
-}
-*/
+
 bool bst::insert(node *&root, bst *anEntry)
 {
         root = new node;
         root->anEntry = anEntry;
-        //root->data = aTable->get_value();
-        //root->bstTable.insert(aTable);
         root->left = root->right = NULL;
         return true;
-    /*()
-    if (data < root->data)
-        bst::insert(root->left, aTable);
-    else
-        bst::insert(root->right, aTable);
-    return true;
-    */
 }
 
 int bst::count()
@@ -119,20 +85,7 @@ int bst::count(node *root)
     int count_total = count(root->left) + count(root->right);
     return count_total;
 }
-/*
-int bst::sum()
-{
-    return sum(root);
-}
 
-int bst::sum(node *root)
-{
-    if (!root)
-        return 0;
-    int sum_total = sum(root->left) + sum(root->right);
-    return sum_total; //+ root->data;
-}
-*/
 int bst::height()
 {
     return height(root);
@@ -199,8 +152,6 @@ bool bst::display(node *root)
     {
         bst::display(root->left);
         bst::displayRecursive(root);
-        //cout << root->data << "\t";
-        //root->bstTable.display();
         bst::display(root->right);
     }
     return true;
