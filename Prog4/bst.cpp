@@ -41,15 +41,15 @@ bool bst::insert(char *name, char *media, char *desc,
                  char *length, char *isNext)
 {
     if (this->className)
-        delete this->className;
+        delete[] this->className;
     if (this->mediaName)
-        delete this->mediaName;
+        delete[] this->mediaName;
     if (this->description)
-        delete this->description;
+        delete[] this->description;
     if (this->mediaLength)
-        delete this->mediaLength;
+        delete[] this->mediaLength;
     if (this->watchNext)
-        delete this->watchNext;
+        delete[] this->watchNext;
     this->className = new char[strlen(name) + 1];
     strcpy(this->className, name);
     this->mediaName = new char[strlen(media) + 1];
