@@ -28,15 +28,15 @@
 bst::bst()
 {
     root = NULL;
-    className = mediaName = description = NULL;
-    mediaLength = watchNext = NULL;
+    //className = mediaName = description = NULL;
+    //mediaLength = watchNext = NULL;
 }
 
 bst::~bst()
 {
     bst::remove_all(root);
 }
-
+/*
 bool bst::insert(char *name, char *media, char *desc,
                  char *length, char *isNext)
 {
@@ -62,8 +62,13 @@ bool bst::insert(char *name, char *media, char *desc,
     strcpy(this->watchNext, isNext);
     return bst::insert(root, this);
 }
+*/
+bool bst::insert(entry *&anEntry)
+{
+    return bst::insert(root, anEntry);
+}
 
-bool bst::insert(node *&root, bst *anEntry)
+bool bst::insert(node *&root, entry *anEntry)
 {
     if (!root)
     {
@@ -72,13 +77,20 @@ bool bst::insert(node *&root, bst *anEntry)
         root->left = root->right = NULL;
         return true;
     }
-    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) == 1)
+    /*
+    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) == 0)
         return false;
     if (strcmp(root->anEntry->mediaName, anEntry->mediaName) < 0)
         return bst::insert(root->left, anEntry);
     if (strcmp(root->anEntry->mediaName, anEntry->mediaName) > 1)
         return bst::insert(root->right, anEntry);
-    return false;
+    */
+    else if (root->anEntry->compareEntries(root->anEntry, anEntry) < 0)
+        return bst::insert(root->left, anEntry);
+    else if (root->anEntry->compareEntries(root->anEntry, anEntry) > 0)
+        return bst::insert(root->right, anEntry);
+    else
+        return false;
 }
 
 int bst::count()
@@ -122,17 +134,19 @@ bool bst::remove_all(node *&root)
         return false;
     remove_all(root->left);
     remove_all(root->right);
-    delete[] className; delete[] mediaName; delete[] description;
-    delete[] mediaLength; delete[] watchNext;
+    //delete[] className; delete[] mediaName; delete[] description;
+    //delete[] mediaLength; delete[] watchNext;
     delete root;
     root = NULL;
     return true;
 }
 
-bool bst::copy(const bst &to_copy)
+bool bst::copy(entry &to_copy)
 {
     node *destination = new node;
-    return copy(destination, to_copy.root);
+    node *temp = new node;
+    temp->anEntry->copyEntry(to_copy);
+    return copy(destination, temp);
 }
 
 int bst::copy(node *&destination, node *source)
@@ -169,10 +183,13 @@ bool bst::display(node *root)
 
 bool bst::displayRecursive(node *root)
 {
+    /*
     cout << "\nClass Name: " << root->anEntry->className;
     cout << "\nMedia Name: " << root->anEntry->mediaName;
     cout << "\nDescription: " << root->anEntry->description;
     cout << "\nMedia Length: " << root->anEntry->mediaLength;
     cout << "\nWatch Next: " << root->anEntry->watchNext;
+    */
+    root->anEntry->displayEntry();
     return true;
 }

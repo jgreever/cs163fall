@@ -12,6 +12,7 @@
 int main()
 {
     bst *mainBST = new bst;
+    entry *mainEntry = new entry;
     char name[100];
     char media[100];
     char desc[300];
@@ -32,12 +33,15 @@ int main()
     cout << "\nIs there anything that needs to be watched next: ";
     cin.get(isNext, 100, '\n');
     cin.ignore(100, '\n');
-    mainBST->insert(name, media, desc, length, isNext);
+    mainEntry->createEntry(name, media, desc, length, isNext);
+    mainBST->insert(mainEntry);
     cout << "\nData: ";
     mainBST->display();
 
     if (mainBST)
         delete mainBST;
+    if (mainEntry)
+        delete mainEntry;
 
     return 1;
 }

@@ -21,17 +21,18 @@
  *      int copy(const table &to_copy); / int copy(node *&destination, node *source);
  * 
  */
-#include <iostream>
-#include <cstring>
-#include <cctype>
-#include <cstdlib>
+//#include <iostream>
+//#include <cstring>
+//#include <cctype>
+//#include <cstdlib>
+#include "entry.hpp"
 using namespace std;
 
-class bst;
+class entry;
 
 struct node
 {
-    bst *anEntry;
+    entry *anEntry;
     node *left;
     node *right;
 };
@@ -41,22 +42,23 @@ class bst
     public:
         bst();
         ~bst();
-        bool insert(char *name, char *media, char *desc,
-                    char *length, char *isNext);
+        //bool insert(char *name, char *media, char *desc,
+        //            char *length, char *isNext);
+        bool insert(entry *&anEntry);
         int count();
         int height();
         bool remove_all();
-        bool copy(const bst &to_copy);
+        bool copy(entry &to_copy);
         bool display();
 
     private:
         node *root;
-        char *className;
-        char *mediaName;
-        char *description;
-        char *mediaLength;
-        char *watchNext;
-        bool insert(node *&root, bst *anEntry);
+        //char *className;
+        //char *mediaName;
+        //char *description;
+        //char *mediaLength;
+        //char *watchNext;
+        bool insert(node *&root, entry *anEntry);
         int count(node *root);
         int height(node *root);
         bool remove_all(node *&root);
