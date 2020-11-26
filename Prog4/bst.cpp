@@ -65,10 +65,20 @@ bool bst::insert(char *name, char *media, char *desc,
 
 bool bst::insert(node *&root, bst *anEntry)
 {
+    if (!root)
+    {
         root = new node;
         root->anEntry = anEntry;
         root->left = root->right = NULL;
         return true;
+    }
+    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) == 1)
+        return false;
+    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) < 0)
+        return bst::insert(root->left, anEntry);
+    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) > 1)
+        return bst::insert(root->right, anEntry);
+    return false;
 }
 
 int bst::count()
@@ -160,7 +170,7 @@ bool bst::display(node *root)
 bool bst::displayRecursive(node *root)
 {
     cout << "\nClass Name: " << root->anEntry->className;
-    cout << "\nMedia Name: " << root->anEntry->className;
+    cout << "\nMedia Name: " << root->anEntry->mediaName;
     cout << "\nDescription: " << root->anEntry->description;
     cout << "\nMedia Length: " << root->anEntry->mediaLength;
     cout << "\nWatch Next: " << root->anEntry->watchNext;
