@@ -18,6 +18,10 @@ int main()
     char desc[300];
     char length[25];
     char isNext[100];
+    int choice = -1;
+
+    do
+    {
     cout << "\nPlease enter the class name: ";
     cin.get(name, 100, '\n');
     cin.ignore(100, '\n');
@@ -37,6 +41,10 @@ int main()
     mainBST->insert(mainEntry);
     cout << "\nData: ";
     mainBST->display();
+    cout << "\nAgain? (1) for yes, (0) for no: ";
+    cin >> choice;
+    cin.ignore(100, '\n');
+    } while (choice != 0);
 
     if (mainBST)
         delete mainBST;
