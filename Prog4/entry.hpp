@@ -24,6 +24,9 @@
 #include <cstring>
 #include <cctype>
 #include <cstdlib>
+#include <limits>
+#include <iostream>
+#include <ios>
 using namespace std;
 
 class entry
