@@ -32,7 +32,7 @@ class entry
         entry();
         ~entry();
         int createEntry(char *name, char *media, char *desc, char *length, char *isNext);
-        int copyEntry(entry &anEntry);
+        int copyEntry(const entry &anEntry);
         int compareEntries(entry *anEntry, entry *anotherEntry);
         int displayEntry();
         int removeEntry();

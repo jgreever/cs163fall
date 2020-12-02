@@ -73,7 +73,7 @@ int entry::createEntry(char *aClass, char *aMedia, char *aDescription, char *aLe
     return 1;
 }
 
-int entry::copyEntry(entry &anEntry)
+int entry::copyEntry(const entry &anEntry)
 {
     return entry::createEntry(anEntry.className, anEntry.mediaName, anEntry.description, anEntry.mediaLength, anEntry.watchNext);
 }
