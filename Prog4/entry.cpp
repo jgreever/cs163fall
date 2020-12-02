@@ -25,8 +25,11 @@ using namespace std;
 
 entry::entry()
 {
-    className = mediaName = description = NULL;
-    mediaLength = watchNext = NULL;
+    className = NULL;
+    mediaName = NULL;
+    description = NULL;
+    mediaLength = NULL;
+    watchNext = NULL;
 }
 
 entry::~entry()
@@ -41,23 +44,20 @@ entry::~entry()
         delete[] mediaLength;
     if (watchNext)
         delete[] watchNext;
-    className = mediaName = NULL;
-    description = mediaLength = NULL;
+    className = NULL;
+    mediaName = NULL;
+    description = NULL;
+    mediaLength = NULL;
     watchNext = NULL;
 }
 
 int entry::createEntry(char *aClass, char *aMedia, char *aDescription, char *aLength, char *aNext)
 {
-    if (className)
-        delete[] className;
-    if (mediaName)
-        delete[] mediaName;
-    if (description)
-        delete[] description;
-    if (mediaLength)
-        delete[] mediaLength;
-    if (watchNext)
-        delete[] watchNext;
+    if (className) delete[] className;
+    if (mediaName) delete[] mediaName;
+    if (description) delete[] description;
+    if (mediaLength) delete[] mediaLength;
+    if (watchNext) delete[] watchNext;
     
     className = new char[strlen(aClass) + 1];
     strcpy(className, aClass);

@@ -59,7 +59,7 @@ class bst
         node *getNode(node *root, char *to_get);
         node *inorderSuccessor(node *root, char *to_find);
         bool search(node *root, char *to_search);
-        bool remove_entry(node *&root, char *to_remove);
+        node *remove_entry(node *&root, char *to_remove);
         bool insert(node *&root, entry &anEntry);
         int count(node *root);
         int height(node *root);

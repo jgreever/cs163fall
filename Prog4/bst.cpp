@@ -32,7 +32,14 @@ bst::bst()
 
 bst::~bst()
 {
-    bst::remove_all(root);
+    if (root)
+    {
+        delete root->left;
+        delete root->right;
+        root->left = root->right = NULL;
+        delete root;
+    }
+    //bst::remove_all(root);
 }
 
 // Lets get the minimum value in the BST and use it for removal
@@ -53,8 +60,7 @@ node *bst::maxValue(node *root)
 // Grab node (if found) and return from search or to delete
 node *bst::getNode(node *root, char *to_get)
 {
-    if (!root)
-        return NULL;
+    if (!root) return NULL;
     else if (root->anEntry.compareEntries(root->anEntry, to_get) == 0)
         return root;
     else if (root->anEntry.compareEntries(root->anEntry, to_get) < 0)
@@ -69,8 +75,7 @@ node *bst::getNode(node *root, char *to_get)
 node *bst::inorderSuccessor(node *root, char *to_find)
 {
     node *current = minValue(root);
-    if (!root)
-        return NULL;
+    if (!root) return NULL;
     if (current->right)
         return minValue(root->right);
     else
@@ -156,7 +161,7 @@ bool bst::remove_all(node *&root)
     remove_all(root->left);
     remove_all(root->right);
     delete root;
-    root = NULL;
+    //root = NULL;
     return true;
 }
 
@@ -210,15 +215,15 @@ bool bst::remove_entry(char *to_remove)
     return bst::remove_entry(root, to_remove);
 }
 
-bool bst::remove_entry(node *&root, char *to_remove)
+node *bst::remove_entry(node *&root, char *to_remove)
 {
     if (!root)
-        return false;
+        return root;
     if (root->anEntry.compareEntries(root->anEntry, to_remove) < 0)
         bst::remove_entry(root->left, to_remove);
     else if (root->anEntry.compareEntries(root->anEntry, to_remove) > 0)
         bst::remove_entry(root->right, to_remove);
-    else if (root->anEntry.compareEntries(root->anEntry, to_remove) == 0)
+    else
     {
         if (!root->left && !root->right)
         {
@@ -227,21 +232,28 @@ bool bst::remove_entry(node *&root, char *to_remove)
         }
         else if (root->left && root->right)
         {
-            node *child = maxValue(root->left);
+            node *child = minValue(root->right);
             root->anEntry.copyEntry(child->anEntry);
-            bst::remove_entry(root, child->anEntry.getMediaName());
+            root->right = bst::remove_entry(root->right, child->anEntry.getMediaName());
         }
         else
         {
-            node *child = (root->left) ? root->left : root->right;
-            node *current = root;
-            root = child;
-            delete current;
+            if (!root->left)
+            {
+                node *temp = root->right;
+                delete root;
+                root = temp;
+            }
+            else if (!root->right)
+            {
+                node *temp = root->left;
+                delete root;
+                root = temp;
+            }
         }
     }
-    else return false;
+    return root;
 }
-
 bool bst::display()
 {
     return display(root);
@@ -269,13 +281,13 @@ bool bst::display_all(node *root)
         return false;
     else if (root)
     {
-        bst::display(root->left);
         bst::displayRecursive(root);
-        bst::display(root->right);
-        return true;
+        bst::display_all(root->left);
+        bst::display_all(root->right);
     }
     else
         return false;
+    return true;
 }
 
 bool bst::displayRecursive(node *root)

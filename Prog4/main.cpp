@@ -39,27 +39,27 @@ int main()
     cin.ignore(100, '\n');
     mainEntry.createEntry(name, media, desc, length, isNext);
     mainBST->insert(mainEntry);
-    cout << "\nData: ";
+    cout << "\n\nRoot Data: ";
     mainBST->display();
-    media[100] = NULL;
-    cout << "\nEnter the media name to search for: ";
+    cout << "\n\nHere is what we have in the BST so far: ";
+    mainBST->display_all();
+    media[100] = '\0';
+    cout << "\n\nEnter the media name to search for: ";
     cin.get(media, 100, '\n');
     cin.ignore(100, '\n');
     mainBST->search(media);
-    media[100] = NULL;
-    cout << "\nEnter the media name to delete: ";
+    media[100] = '\0';
+    cout << "\n\nEnter the media name to delete: ";
     cin.get(media, 100, '\n');
     cin.ignore(100, '\n');
     mainBST->remove_entry(media);
-    cout << "\nAgain? (1) for yes, (0) for no: ";
+    cout << "\n\nAgain? (1) for yes, (0) for no: ";
     cin >> choice;
     cin.ignore(100, '\n');
     } while (choice != 0);
 
     if (mainBST)
         delete mainBST;
-    //if (mainEntry)
-    //    delete mainEntry;
 
     return 1;
 }
