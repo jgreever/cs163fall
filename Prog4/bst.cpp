@@ -68,13 +68,13 @@ bool bst::insert(entry *&anEntry)
     return bst::insert(root, anEntry);
 }
 
-bool bst::insert(node *&root, entry *anEntry)
+bool bst::insert(node *&rootNode, entry *anEntry)
 {
-    if (!root)
+    if (!rootNode)
     {
-        root = new node;
-        root->anEntry = anEntry;
-        root->left = root->right = NULL;
+        rootNode = new node;
+        rootNode->anEntry = anEntry;
+        rootNode->left = rootNode->right = NULL;
         return true;
     }
     /*
@@ -85,12 +85,13 @@ bool bst::insert(node *&root, entry *anEntry)
     if (strcmp(root->anEntry->mediaName, anEntry->mediaName) > 1)
         return bst::insert(root->right, anEntry);
     */
-    else if (root->anEntry->compareEntries(root->anEntry, anEntry) < 0)
-        return bst::insert(root->left, anEntry);
-    else if (root->anEntry->compareEntries(root->anEntry, anEntry) > 0)
-        return bst::insert(root->right, anEntry);
+    else if (rootNode->anEntry->compareEntries(rootNode->anEntry, anEntry) < 0)
+        return bst::insert(rootNode->left, anEntry);
+    else if (rootNode->anEntry->compareEntries(rootNode->anEntry, anEntry) > 0)
+        return bst::insert(rootNode->right, anEntry);
     else
         return false;
+    return true;
 }
 
 int bst::count()
