@@ -32,7 +32,7 @@ class entry;
 
 struct node
 {
-    entry *anEntry;
+    entry anEntry;
     node *left;
     node *right;
 };
@@ -42,27 +42,30 @@ class bst
     public:
         bst();
         ~bst();
-        //bool insert(char *name, char *media, char *desc,
-        //            char *length, char *isNext);
-        bool insert(entry *&anEntry);
+        bool insert(entry &anEntry);
         int count();
         int height();
         bool remove_all();
         bool copy(entry &to_copy);
+        bool search(char *to_search);
+        bool remove_entry(char *to_remove);
         bool display();
+        bool display_all();
 
     private:
         node *root;
-        //char *className;
-        //char *mediaName;
-        //char *description;
-        //char *mediaLength;
-        //char *watchNext;
-        bool insert(node *&root, entry *anEntry);
+        node *minValue(node *root);
+        node *maxValue(node *root);
+        node *getNode(node *root, char *to_get);
+        node *inorderSuccessor(node *root, char *to_find);
+        bool search(node *root, char *to_search);
+        bool remove_entry(node *&root, char *to_remove);
+        bool insert(node *&root, entry &anEntry);
         int count(node *root);
         int height(node *root);
         bool remove_all(node *&root);
         int copy(node *&destination, node *source);
         bool display(node *root);
+        bool display_all(node *root);
         bool displayRecursive(node *root);
 };

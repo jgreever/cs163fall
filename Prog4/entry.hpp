@@ -33,7 +33,9 @@ class entry
         ~entry();
         int createEntry(char *name, char *media, char *desc, char *length, char *isNext);
         int copyEntry(const entry &anEntry);
-        int compareEntries(entry *anEntry, entry *anotherEntry);
+        int compareEntries(entry &anEntry, char *to_compare);
+        int compareEntries(entry &anEntry, entry &anotherEntry);
+        char *getMediaName();
         int displayEntry();
         int removeEntry();
         int retrieveEntry();

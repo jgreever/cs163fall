@@ -28,67 +28,87 @@
 bst::bst()
 {
     root = NULL;
-    //className = mediaName = description = NULL;
-    //mediaLength = watchNext = NULL;
 }
 
 bst::~bst()
 {
     bst::remove_all(root);
 }
-/*
-bool bst::insert(char *name, char *media, char *desc,
-                 char *length, char *isNext)
+
+// Lets get the minimum value in the BST and use it for removal
+node *bst::minValue(node *root)
 {
-    if (this->className)
-        delete[] this->className;
-    if (this->mediaName)
-        delete[] this->mediaName;
-    if (this->description)
-        delete[] this->description;
-    if (this->mediaLength)
-        delete[] this->mediaLength;
-    if (this->watchNext)
-        delete[] this->watchNext;
-    this->className = new char[strlen(name) + 1];
-    strcpy(this->className, name);
-    this->mediaName = new char[strlen(media) + 1];
-    strcpy(this->mediaName, media);
-    this->description = new char[strlen(desc) + 1];
-    strcpy(this->description, desc);
-    this->mediaLength = new char[strlen(length) + 1];
-    strcpy(this->mediaLength, length);
-    this->watchNext = new char[strlen(isNext) + 1];
-    strcpy(this->watchNext, isNext);
-    return bst::insert(root, this);
+    while (root->left)
+        root = root->left;
+    return root;
 }
-*/
-bool bst::insert(entry *&anEntry)
+
+// Lets get the maximum value in the BST and use it for removal
+node *bst::maxValue(node *root)
+{
+    while (root->right)
+        root = root->right;
+    return root;
+}
+// Grab node (if found) and return from search or to delete
+node *bst::getNode(node *root, char *to_get)
+{
+    if (!root)
+        return NULL;
+    else if (root->anEntry.compareEntries(root->anEntry, to_get) == 0)
+        return root;
+    else if (root->anEntry.compareEntries(root->anEntry, to_get) < 0)
+        return getNode(root->right, to_get);
+    else if (root->anEntry.compareEntries(root->anEntry, to_get) > 0)
+        return getNode(root->left, to_get);
+    else
+        return NULL;
+}
+
+// Our Inorder Successor so we can delete and reconnect nodes
+node *bst::inorderSuccessor(node *root, char *to_find)
+{
+    node *current = minValue(root);
+    if (!root)
+        return NULL;
+    if (current->right)
+        return minValue(root->right);
+    else
+    {
+        node *parent = root;
+        node *child = NULL;
+        while (parent != current)
+        {
+            if (current->anEntry.compareEntries(current->anEntry, parent->anEntry) < 0)
+            {
+                child = parent;
+                parent = parent->left;
+            }
+            else
+                parent = parent->right;
+        }
+        return child;
+    }
+}
+
+bool bst::insert(entry &anEntry)
 {
     return bst::insert(root, anEntry);
 }
 
-bool bst::insert(node *&rootNode, entry *anEntry)
+bool bst::insert(node *&root, entry &anEntry)
 {
-    if (!rootNode)
+    if (!root)
     {
-        rootNode = new node;
-        rootNode->anEntry = anEntry;
-        rootNode->left = rootNode->right = NULL;
+        root = new node;
+        root->anEntry.copyEntry(anEntry);
+        root->left = root->right = NULL;
         return true;
     }
-    /*
-    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) == 0)
-        return false;
-    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) < 0)
+    else if (root->anEntry.compareEntries(root->anEntry, anEntry) < 0)
         return bst::insert(root->left, anEntry);
-    if (strcmp(root->anEntry->mediaName, anEntry->mediaName) > 1)
+    else if (root->anEntry.compareEntries(root->anEntry, anEntry) > 0)
         return bst::insert(root->right, anEntry);
-    */
-    else if (rootNode->anEntry->compareEntries(rootNode->anEntry, anEntry) < 0)
-        return bst::insert(rootNode->left, anEntry);
-    else if (rootNode->anEntry->compareEntries(rootNode->anEntry, anEntry) > 0)
-        return bst::insert(rootNode->right, anEntry);
     else
         return false;
     return true;
@@ -135,8 +155,6 @@ bool bst::remove_all(node *&root)
         return false;
     remove_all(root->left);
     remove_all(root->right);
-    //delete[] className; delete[] mediaName; delete[] description;
-    //delete[] mediaLength; delete[] watchNext;
     delete root;
     root = NULL;
     return true;
@@ -146,7 +164,7 @@ bool bst::copy(entry &to_copy)
 {
     node *destination = new node;
     node *temp = new node;
-    temp->anEntry->copyEntry(to_copy);
+    temp->anEntry.copyEntry(to_copy);
     return copy(destination, temp);
 }
 
@@ -165,6 +183,65 @@ int bst::copy(node *&destination, node *source)
     return (copy_nodes + 1);
 }
 
+bool bst::search(char *to_search)
+{
+    return bst::search(root, to_search);
+}
+
+bool bst::search(node *root, char *to_search)
+{
+    if (!root)
+        return false;
+    else if (root->anEntry.compareEntries(root->anEntry, to_search) == 0)
+    {
+        bst::display(root);
+        return true;
+    }
+    else if (root->anEntry.compareEntries(root->anEntry, to_search) < 0)
+        return bst::search(root->left, to_search);
+    else if (root->anEntry.compareEntries(root->anEntry, to_search) > 0)
+        return bst::search(root->right, to_search);
+    else
+        return false;
+}
+
+bool bst::remove_entry(char *to_remove)
+{
+    return bst::remove_entry(root, to_remove);
+}
+
+bool bst::remove_entry(node *&root, char *to_remove)
+{
+    if (!root)
+        return false;
+    if (root->anEntry.compareEntries(root->anEntry, to_remove) < 0)
+        bst::remove_entry(root->left, to_remove);
+    else if (root->anEntry.compareEntries(root->anEntry, to_remove) > 0)
+        bst::remove_entry(root->right, to_remove);
+    else if (root->anEntry.compareEntries(root->anEntry, to_remove) == 0)
+    {
+        if (!root->left && !root->right)
+        {
+            delete root;
+            root = NULL;
+        }
+        else if (root->left && root->right)
+        {
+            node *child = maxValue(root->left);
+            root->anEntry.copyEntry(child->anEntry);
+            bst::remove_entry(root, child->anEntry.getMediaName());
+        }
+        else
+        {
+            node *child = (root->left) ? root->left : root->right;
+            node *current = root;
+            root = child;
+            delete current;
+        }
+    }
+    else return false;
+}
+
 bool bst::display()
 {
     return display(root);
@@ -175,22 +252,34 @@ bool bst::display(node *root)
     if (root == NULL) return false;
     if (root != NULL)
     {
+        root->anEntry.displayEntry();
+        return true;
+    }
+    return false;
+}
+
+bool bst::display_all()
+{
+    return bst::display_all(root);
+}
+
+bool bst::display_all(node *root)
+{
+    if (!root)
+        return false;
+    else if (root)
+    {
         bst::display(root->left);
         bst::displayRecursive(root);
         bst::display(root->right);
+        return true;
     }
-    return true;
+    else
+        return false;
 }
 
 bool bst::displayRecursive(node *root)
 {
-    /*
-    cout << "\nClass Name: " << root->anEntry->className;
-    cout << "\nMedia Name: " << root->anEntry->mediaName;
-    cout << "\nDescription: " << root->anEntry->description;
-    cout << "\nMedia Length: " << root->anEntry->mediaLength;
-    cout << "\nWatch Next: " << root->anEntry->watchNext;
-    */
-    root->anEntry->displayEntry();
+    root->anEntry.displayEntry();
     return true;
 }

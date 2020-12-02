@@ -12,7 +12,7 @@
 int main()
 {
     bst *mainBST = new bst;
-    entry *mainEntry = new entry;
+    entry mainEntry;
     char name[100];
     char media[100];
     char desc[300];
@@ -37,10 +37,20 @@ int main()
     cout << "\nIs there anything that needs to be watched next: ";
     cin.get(isNext, 100, '\n');
     cin.ignore(100, '\n');
-    mainEntry->createEntry(name, media, desc, length, isNext);
+    mainEntry.createEntry(name, media, desc, length, isNext);
     mainBST->insert(mainEntry);
     cout << "\nData: ";
     mainBST->display();
+    media[100] = NULL;
+    cout << "\nEnter the media name to search for: ";
+    cin.get(media, 100, '\n');
+    cin.ignore(100, '\n');
+    mainBST->search(media);
+    media[100] = NULL;
+    cout << "\nEnter the media name to delete: ";
+    cin.get(media, 100, '\n');
+    cin.ignore(100, '\n');
+    mainBST->remove_entry(media);
     cout << "\nAgain? (1) for yes, (0) for no: ";
     cin >> choice;
     cin.ignore(100, '\n');
@@ -48,8 +58,8 @@ int main()
 
     if (mainBST)
         delete mainBST;
-    if (mainEntry)
-        delete mainEntry;
+    //if (mainEntry)
+    //    delete mainEntry;
 
     return 1;
 }

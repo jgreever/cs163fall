@@ -78,10 +78,20 @@ int entry::copyEntry(const entry &anEntry)
     return entry::createEntry(anEntry.className, anEntry.mediaName, anEntry.description, anEntry.mediaLength, anEntry.watchNext);
 }
 
-int entry::compareEntries(entry *anEntry, entry *anotherEntry)
+int entry::compareEntries(entry &anEntry, char *to_compare)
 {
-    int strCompare = strcmp(anEntry->className, anotherEntry->className);
-    return strCompare;
+    return (strcmp(anEntry.mediaName, to_compare));
+}
+
+int entry::compareEntries(entry &anEntry, entry &anotherEntry)
+{
+    return (strcmp(anEntry.mediaName, anotherEntry.mediaName));
+}
+
+char *entry::getMediaName()
+{
+    char *reMediaName = new char[strlen(mediaName) + 1];
+    return reMediaName;
 }
 
 int entry::displayEntry()
