@@ -19,7 +19,6 @@
  *      int retrieveEntry();
  * 
  */
-//#include "bst.hpp"
 #include <iostream>
 #include <cstring>
 #include <cctype>

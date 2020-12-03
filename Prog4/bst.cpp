@@ -41,24 +41,11 @@ void bst::deleteTree(node * tree)
    }
 }
 
+//destructor that calls deleteTree(root) to delete all nodes and clean up
 bst::~bst()
 {
    deleteTree(root);
 }
-
-/*
-bst::~bst()
-{
-    if (root)
-    {
-        delete root->left;
-        delete root->right;
-        root->left = root->right = NULL;
-        delete root;
-    }
-    //bst::remove_all(root);
-}
-*/
 
 // Lets get the minimum value in the BST and use it for removal
 node *bst::minValue(node *root)
@@ -89,38 +76,13 @@ node *bst::getNode(node *root, char *to_get)
         return NULL;
 }
 
-/*
-// Our Inorder Successor so we can delete and reconnect nodes
-node *bst::inorderSuccessor(node *root, char *to_find)
-{
-    node *current = minValue(root);
-    if (!root) return NULL;
-    if (current->right)
-        return minValue(root->right);
-    else
-    {
-        node *parent = root;
-        node *child = NULL;
-        while (parent != current)
-        {
-            if (current->anEntry.compareEntries(current->anEntry, parent->anEntry) > 0)
-            {
-                child = parent;
-                parent = parent->left;
-            }
-            else
-                parent = parent->right;
-        }
-        return child;
-    }
-}
-*/
-
+//wrapper funcion this passes in anEntry to be inserted. it returns it with root
 bool bst::insert(entry &anEntry)
 {
     return bst::insert(root, anEntry);
 }
 
+//grabs the value passed by the wrapper function and adds the entry if it doesn't exist
 bool bst::insert(node *&root, entry &anEntry)
 {
     if (!root)
@@ -139,13 +101,7 @@ bool bst::insert(node *&root, entry &anEntry)
     return true;
 }
 
-/*
-int bst::count()
-{
-    return count(root);
-}
-*/
-
+//this counts how many nodes we have. good for many things
 int bst::count(node *root)
 {
     if (!root)
@@ -156,11 +112,13 @@ int bst::count(node *root)
     return count_total;
 }
 
+//wrapper to get the BST height
 int bst::height()
 {
     return height(root);
 }
 
+//does traversal to determine the height of the BST and returns an int value
 int bst::height(node *root)
 {
     if (!root)
@@ -171,11 +129,14 @@ int bst::height(node *root)
     return (total_height + 1);
 }
 
+//wrapper to remove all nodes
 bool bst::remove_all()
 {
     return remove_all(root);
 }
 
+//this bad boy will destroy everything you can think of!
+//does all traversing needed to delete nodes properly
 bool bst::remove_all(node *&root)
 {
     if (!root)
@@ -187,6 +148,7 @@ bool bst::remove_all(node *&root)
     return true;
 }
 
+//wrapper, this makes a new node and passes it to the other copy function
 bool bst::copy(entry &to_copy)
 {
     node *destination = new node;
@@ -195,6 +157,7 @@ bool bst::copy(entry &to_copy)
     return copy(destination, temp);
 }
 
+//this grabs value from wrapper function, and copies data from one node to the next
 int bst::copy(node *&destination, node *source)
 {
     if (!source)
@@ -210,16 +173,19 @@ int bst::copy(node *&destination, node *source)
     return (copy_nodes + 1);
 }
 
+//wrapper for search function
 bool bst::search(char *to_search)
 {
     return bst::search(root, to_search);
 }
 
+//wrapper to search for all instances of a class
 bool bst::searchAllClass(char *classToSearch)
 {
     return searchAllClass(root, classToSearch);
 }
 
+//grabs value from wrapper and traverses to display all entries for a class
 bool bst::searchAllClass(node *root, char *to_search)
 {
     if (!root)
@@ -233,6 +199,7 @@ bool bst::searchAllClass(node *root, char *to_search)
     return searchAllClass(root->right, to_search);
 }
 
+//grabs data from wrapper and finds the item to display
 bool bst::search(node *root, char *to_search)
 {
     if (!root)
@@ -245,26 +212,16 @@ bool bst::search(node *root, char *to_search)
     if (root->anEntry.compareEntries(root->anEntry, to_search) > 0)
         return search(root->left, to_search);
     return search(root->right, to_search);
-    /*
-    else if (root->anEntry.compareEntries(root->anEntry, to_search) == 0)
-    {
-        bst::display(root);
-        return true;
-    }
-    else if (root->anEntry.compareEntries(root->anEntry, to_search) > 0)
-        return bst::search(root->left, to_search);
-    else if (root->anEntry.compareEntries(root->anEntry, to_search) < 0)
-        return bst::search(root->right, to_search);
-    else
-        return false;
-    */
 }
 
+//wrapper to remove an entry
 bool bst::remove_entry(char *to_remove)
 {
     return bst::remove_entry(root, to_remove);
 }
 
+//grabs wrapper values and deletes a single node and reconnects any
+//child nodes and parent node (if needed)
 node *bst::remove_entry(node *&root, char *to_remove)
 {
     if (!root)
@@ -305,11 +262,13 @@ node *bst::remove_entry(node *&root, char *to_remove)
     return root;
 }
 
+//wrapper to delete all instances of a class in the BST
 bool bst::deleteAllClass(char *to_remove)
 {
     return deleteAllClass(root, to_remove);
 }
 
+//deletes all entries in the BST that match the className
 node *bst::deleteAllClass(node *&root, char *to_remove)
 {
     if (!root)
@@ -350,25 +309,30 @@ node *bst::deleteAllClass(node *&root, char *to_remove)
     return root;
 }
 
+//wrapper to delete an entire class
 bool bst::remove_class(char *to_remove)
 {
     return remove_class(root, to_remove);
 }
 
+//traverses and deletes all instances of a class in the BST recursivly
 node *bst::remove_class(node *&root, char *to_remove)
 {
     if (!root) return NULL;
-    root->left = remove_class(root->left, to_remove);
     deleteAllClass(root, to_remove);
+    root->left = remove_class(root->left, to_remove);
+    //deleteAllClass(root, to_remove);
     root->right = deleteAllClass(root->right, to_remove);
     return root;
 }
 
+//wrapper to display an entry
 bool bst::display()
 {
     return display(root);
 }
 
+//outputs the value in a node
 bool bst::display(node *root)
 {
     if (root == NULL) return false;
@@ -380,11 +344,13 @@ bool bst::display(node *root)
     return false;
 }
 
+//wrapper to display all entries
 bool bst::display_all()
 {
     return bst::display_all(root);
 }
 
+//displays all the entries if they exist
 bool bst::display_all(node *root)
 {
     if (!root)
@@ -400,6 +366,7 @@ bool bst::display_all(node *root)
     return true;
 }
 
+//display the entries, but recursivly
 bool bst::displayRecursive(node *root)
 {
     root->anEntry.displayEntry();

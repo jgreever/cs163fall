@@ -39,7 +39,6 @@ int main()
         cin >> choice;
         cin.ignore(100, '\n');
         cin.clear();
-        //cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (choice)
         {

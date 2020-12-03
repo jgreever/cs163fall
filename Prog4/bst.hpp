@@ -21,10 +21,6 @@
  *      int copy(const table &to_copy); / int copy(node *&destination, node *source);
  * 
  */
-//#include <iostream>
-//#include <cstring>
-//#include <cctype>
-//#include <cstdlib>
 #include "entry.hpp"
 using namespace std;
 
@@ -44,7 +40,7 @@ class bst
         void deleteTree(node *tree);
         ~bst();
         bool insert(entry &anEntry);
-        //int count();
+        int count();
         int height();
         bool remove_all();
         bool copy(entry &to_copy);
@@ -61,7 +57,6 @@ class bst
         node *minValue(node *root);
         node *maxValue(node *root);
         node *getNode(node *root, char *to_get);
-        //node *inorderSuccessor(node *root, char *to_find);
         bool search(node *root, char *to_search);
         bool searchAllClass(node *root, char *classToSearch);
         node *remove_entry(node *&root, char *to_remove);
