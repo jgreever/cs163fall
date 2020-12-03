@@ -37,8 +37,10 @@ class entry
         int createEntry(char *name, char *media, char *desc, char *length, char *isNext);
         int copyEntry(const entry &anEntry);
         int compareEntries(entry &anEntry, char *to_compare);
+        int compareClass(entry &anEntry, char *to_compare);
         int compareEntries(entry &anEntry, entry &anotherEntry);
         char *getMediaName();
+        char *getClassName();
         int displayEntry();
         int removeEntry();
         int retrieveEntry();

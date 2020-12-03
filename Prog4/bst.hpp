@@ -41,14 +41,17 @@ class bst
 {
     public:
         bst();
+        void deleteTree(node *tree);
         ~bst();
         bool insert(entry &anEntry);
-        int count();
+        //int count();
         int height();
         bool remove_all();
         bool copy(entry &to_copy);
         bool search(char *to_search);
+        bool remove_class(char *to_remove);
         bool remove_entry(char *to_remove);
+        bool deleteAllClass(char *to_remove);
         bool display();
         bool display_all();
 
@@ -57,9 +60,11 @@ class bst
         node *minValue(node *root);
         node *maxValue(node *root);
         node *getNode(node *root, char *to_get);
-        node *inorderSuccessor(node *root, char *to_find);
+        //node *inorderSuccessor(node *root, char *to_find);
         bool search(node *root, char *to_search);
         node *remove_entry(node *&root, char *to_remove);
+        node *remove_class(node *&root, char *to_remove);
+        node *deleteAllClass(node *&root, char *to_remove);
         bool insert(node *&root, entry &anEntry);
         int count(node *root);
         int height(node *root);

@@ -30,6 +30,23 @@ bst::bst()
     root = NULL;
 }
 
+// destructor for trees, helps the ~bst() function do it's job
+void bst::deleteTree(node * tree)
+{
+   if (tree)
+   {
+      deleteTree(tree->left);
+      deleteTree(tree->right);
+      delete tree;
+   }
+}
+
+bst::~bst()
+{
+   deleteTree(root);
+}
+
+/*
 bst::~bst()
 {
     if (root)
@@ -41,6 +58,7 @@ bst::~bst()
     }
     //bst::remove_all(root);
 }
+*/
 
 // Lets get the minimum value in the BST and use it for removal
 node *bst::minValue(node *root)
@@ -71,6 +89,7 @@ node *bst::getNode(node *root, char *to_get)
         return NULL;
 }
 
+/*
 // Our Inorder Successor so we can delete and reconnect nodes
 node *bst::inorderSuccessor(node *root, char *to_find)
 {
@@ -84,7 +103,7 @@ node *bst::inorderSuccessor(node *root, char *to_find)
         node *child = NULL;
         while (parent != current)
         {
-            if (current->anEntry.compareEntries(current->anEntry, parent->anEntry) < 0)
+            if (current->anEntry.compareEntries(current->anEntry, parent->anEntry) > 0)
             {
                 child = parent;
                 parent = parent->left;
@@ -95,6 +114,7 @@ node *bst::inorderSuccessor(node *root, char *to_find)
         return child;
     }
 }
+*/
 
 bool bst::insert(entry &anEntry)
 {
@@ -110,19 +130,21 @@ bool bst::insert(node *&root, entry &anEntry)
         root->left = root->right = NULL;
         return true;
     }
-    else if (root->anEntry.compareEntries(root->anEntry, anEntry) < 0)
-        return bst::insert(root->left, anEntry);
     else if (root->anEntry.compareEntries(root->anEntry, anEntry) > 0)
+        return bst::insert(root->left, anEntry);
+    else if (root->anEntry.compareEntries(root->anEntry, anEntry) < 0)
         return bst::insert(root->right, anEntry);
     else
         return false;
     return true;
 }
 
+/*
 int bst::count()
 {
     return count(root);
 }
+*/
 
 int bst::count(node *root)
 {
@@ -197,17 +219,24 @@ bool bst::search(node *root, char *to_search)
 {
     if (!root)
         return false;
+    if (root->anEntry.compareEntries(root->anEntry, to_search) == 0)
+        return true;
+    if (root->anEntry.compareEntries(root->anEntry, to_search) > 0)
+        return search(root->left, to_search);
+    return search(root->right, to_search);
+    /*
     else if (root->anEntry.compareEntries(root->anEntry, to_search) == 0)
     {
         bst::display(root);
         return true;
     }
-    else if (root->anEntry.compareEntries(root->anEntry, to_search) < 0)
-        return bst::search(root->left, to_search);
     else if (root->anEntry.compareEntries(root->anEntry, to_search) > 0)
+        return bst::search(root->left, to_search);
+    else if (root->anEntry.compareEntries(root->anEntry, to_search) < 0)
         return bst::search(root->right, to_search);
     else
         return false;
+    */
 }
 
 bool bst::remove_entry(char *to_remove)
@@ -219,10 +248,10 @@ node *bst::remove_entry(node *&root, char *to_remove)
 {
     if (!root)
         return root;
-    if (root->anEntry.compareEntries(root->anEntry, to_remove) < 0)
-        bst::remove_entry(root->left, to_remove);
-    else if (root->anEntry.compareEntries(root->anEntry, to_remove) > 0)
-        bst::remove_entry(root->right, to_remove);
+    if (root->anEntry.compareEntries(root->anEntry, to_remove) > 0)
+        root->left = remove_entry(root->left, to_remove);
+    else if (root->anEntry.compareEntries(root->anEntry, to_remove) < 0)
+        root->right = remove_entry(root->right, to_remove);
     else
     {
         if (!root->left && !root->right)
@@ -234,7 +263,7 @@ node *bst::remove_entry(node *&root, char *to_remove)
         {
             node *child = minValue(root->right);
             root->anEntry.copyEntry(child->anEntry);
-            root->right = bst::remove_entry(root->right, child->anEntry.getMediaName());
+            root->right = remove_entry(root->right, child->anEntry.getMediaName());
         }
         else
         {
@@ -254,6 +283,66 @@ node *bst::remove_entry(node *&root, char *to_remove)
     }
     return root;
 }
+
+bool bst::deleteAllClass(char *to_remove)
+{
+    return deleteAllClass(root, to_remove);
+}
+
+node *bst::deleteAllClass(node *&root, char *to_remove)
+{
+    if (!root)
+        return root;
+    if (root->anEntry.compareClass(root->anEntry, to_remove) > 0)
+        root->left = remove_entry(root->left, to_remove);
+    else if (root->anEntry.compareClass(root->anEntry, to_remove) < 0)
+        root->right = remove_entry(root->right, to_remove);
+    else
+    {
+        if (!root->left && !root->right)
+        {
+            delete root;
+            root = NULL;
+        }
+        else if (root->left && root->right)
+        {
+            node *child = minValue(root->right);
+            root->anEntry.copyEntry(child->anEntry);
+            root->right = remove_entry(root->right, child->anEntry.getClassName());
+        }
+        else
+        {
+            if (!root->left)
+            {
+                node *temp = root->right;
+                delete root;
+                root = temp;
+            }
+            else if (!root->right)
+            {
+                node *temp = root->left;
+                delete root;
+                root = temp;
+            }
+        }
+    }
+    return root;
+}
+
+bool bst::remove_class(char *to_remove)
+{
+    return remove_class(root, to_remove);
+}
+
+node *bst::remove_class(node *&root, char *to_remove)
+{
+    if (!root) return NULL;
+        root->left = remove_class(root->left, to_remove);
+        deleteAllClass(root, to_remove);
+        root->right = deleteAllClass(root->right, to_remove);
+    return root;
+}
+
 bool bst::display()
 {
     return display(root);

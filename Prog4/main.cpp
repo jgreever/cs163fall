@@ -92,6 +92,7 @@ int main()
                 cin.get(name, 100, '\n');
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                mainBST->deleteAllClass(name);
                 //TODO: Add function to find and delete all classes by name
                 break;
 
@@ -102,6 +103,7 @@ int main()
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 //TODO: Add code to find and delete all classes via their name
+                mainBST->display();
                 break;
             
             case 6:
@@ -115,15 +117,12 @@ int main()
 
             case 8:
                 cout << "\n\nExiting program, thank you!\n\n";
+                //mainBST->remove_all();
                 break;
 
             default:
                 cout << "\n\nInvalid choice. Please try again.\n\n";
                 continue;
-
-            //cout << "\n\nAgain? (1) for yes, (0) for no: ";
-            //cin >> choice;
-            //cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     } while (choice != 8);
 

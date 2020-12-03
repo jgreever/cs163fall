@@ -83,6 +83,11 @@ int entry::compareEntries(entry &anEntry, char *to_compare)
     return (strcmp(anEntry.mediaName, to_compare));
 }
 
+int entry::compareClass(entry &anEntry, char *to_compare)
+{
+    return (strcmp(anEntry.className, to_compare));
+}
+
 int entry::compareEntries(entry &anEntry, entry &anotherEntry)
 {
     return (strcmp(anEntry.mediaName, anotherEntry.mediaName));
@@ -92,6 +97,12 @@ char *entry::getMediaName()
 {
     char *reMediaName = new char[strlen(mediaName) + 1];
     return reMediaName;
+}
+
+char *entry::getClassName()
+{
+    char *reClassName = new char[strlen(className)+ 1];
+    return reClassName;
 }
 
 int entry::displayEntry()
