@@ -38,6 +38,8 @@ int main()
         cout << "********************\n\n";
         cin >> choice;
         cin.ignore(100, '\n');
+        cin.clear();
+        //cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (choice)
         {
@@ -103,7 +105,7 @@ int main()
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 //TODO: Add code to find and delete all classes via their name
-                mainBST->display();
+                mainBST->searchAllClass(name);
                 break;
             
             case 6:
@@ -117,7 +119,6 @@ int main()
 
             case 8:
                 cout << "\n\nExiting program, thank you!\n\n";
-                //mainBST->remove_all();
                 break;
 
             default:

@@ -215,12 +215,33 @@ bool bst::search(char *to_search)
     return bst::search(root, to_search);
 }
 
+bool bst::searchAllClass(char *classToSearch)
+{
+    return searchAllClass(root, classToSearch);
+}
+
+bool bst::searchAllClass(node *root, char *to_search)
+{
+    if (!root)
+        return false;
+    if (root->anEntry.compareClass(root->anEntry, to_search) == 0)
+    {
+        root->anEntry.displayEntry();
+    }
+    if (root->anEntry.compareClass(root->anEntry, to_search) > 0)
+        return searchAllClass(root->left, to_search);
+    return searchAllClass(root->right, to_search);
+}
+
 bool bst::search(node *root, char *to_search)
 {
     if (!root)
         return false;
     if (root->anEntry.compareEntries(root->anEntry, to_search) == 0)
+    {
+        root->anEntry.displayEntry();
         return true;
+    }
     if (root->anEntry.compareEntries(root->anEntry, to_search) > 0)
         return search(root->left, to_search);
     return search(root->right, to_search);
@@ -337,9 +358,9 @@ bool bst::remove_class(char *to_remove)
 node *bst::remove_class(node *&root, char *to_remove)
 {
     if (!root) return NULL;
-        root->left = remove_class(root->left, to_remove);
-        deleteAllClass(root, to_remove);
-        root->right = deleteAllClass(root->right, to_remove);
+    root->left = remove_class(root->left, to_remove);
+    deleteAllClass(root, to_remove);
+    root->right = deleteAllClass(root->right, to_remove);
     return root;
 }
 
