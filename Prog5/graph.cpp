@@ -3,6 +3,7 @@
  * 
  */
 #include "graph.hpp"
+using namespace std;
 
 graph::graph(int size)
 {
@@ -75,6 +76,7 @@ int graph::insert_edge(char *current_vertex, char *to_attach)
 
 int graph::display_adjacent(char *key_value)
 {
+    cout << "\n\nClass requirements: ";
         int key = find_location(key_value);
         if (adjacency_list[key].anEntry->compare(key_value) == true)
         {
@@ -82,7 +84,7 @@ int graph::display_adjacent(char *key_value)
             while (current)
             {
                 if (current->adjacent)
-                    current->adjacent->anEntry->display();
+                    cout << current->adjacent->anEntry->display() << " \u2b91  ";
                 current = current->next;
             }
         }

@@ -60,7 +60,7 @@ int aClass::display(void) const
         return 0;
     else
     {
-        cout << "\n\nClass Number: " << classNum << "\n";
+        cout << classNum;
         return 1;
     }
 };
