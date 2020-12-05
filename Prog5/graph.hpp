@@ -11,11 +11,11 @@
 
 // Forward declarations to keep compiler happy
 struct node;
-class courseList;
+class aClass;
 
 struct vertex
 {
-    entry *classList;
+    aClass *anEntry;
     struct node *head; //”incomplete” declaration
 };
 
@@ -29,7 +29,8 @@ class table
 {
     public:
         table(int size=5);
-        int insert_vertex(const entry &to_add);
+        ~table(void);
+        int insert_vertex(const aClass &to_add);
         int find_location(char *key_value);
         int insert_edge(char *current_vertex, char *to_ttach);
         int display_adjacent(char *key_value);

@@ -1,15 +1,22 @@
-/* entry.hpp
+/* aClass.hpp
  *
  * 
  */
 #include <iostream>
 #include <cstring>
 #include <cctype>
-using namespace std;
 
-class entry
+class aClass
 {
-    entry();
-    ~entry();
-    bool createEntry(char *1, char *2, char *3,)
+    public:
+        aClass();
+        ~aClass();
+        int createEntry(char *classNum);
+        int copyEntry(const aClass &to_copy);
+        int retrieve(char *name, aClass &found);
+        int retrieve(aClass &found) const;
+        bool compare (char *matchThis);
+        int display(void) const;
+    private:
+        char *classNum;
 };

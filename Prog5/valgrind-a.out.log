@@ -1,0 +1,14 @@
+==636691== Memcheck, a memory error detector
+==636691== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==636691== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==636691== Command: ./a.out
+==636691== Parent PID: 628547
+==636691== 
+==636691== 
+==636691== HEAP SUMMARY:
+==636691==     in use at exit: 0 bytes in 0 blocks
+==636691==   total heap usage: 1 allocs, 1 frees, 72,704 bytes allocated
+==636691== 
+==636691== All heap blocks were freed -- no leaks are possible
+==636691== 
+==636691== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
