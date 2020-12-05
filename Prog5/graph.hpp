@@ -25,13 +25,14 @@ struct node
     node *next; 
 };
 
-class table
+class graph
 {
     public:
-        table(int size=5);
-        ~table(void);
+        graph(int size=5);
+        ~graph(void);
         int insert_vertex(const aClass &to_add);
         int find_location(char *key_value);
+        int find_location(char *key_value, int key);
         int insert_edge(char *current_vertex, char *to_ttach);
         int display_adjacent(char *key_value);
     private:

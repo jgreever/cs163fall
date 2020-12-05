@@ -4,7 +4,7 @@
  */
 #include "graph.hpp"
 
-table::table(int size)
+graph::graph(int size)
 {
     adjacency_list = new vertex[size];
     for (int i = 0; i < size; ++i)
@@ -15,20 +15,25 @@ table::table(int size)
     list_size = size;
 };
 
-table::~table()
+graph::~graph()
 {
-    //TODO
-    //! Make destructor !//
-};
+    for (int i = 0; i < list_size; ++i)
+    {
+        delete adjacency_list[i].anEntry;
+        delete adjacency_list[i].head;
+    }
+    delete[] adjacency_list;
+    list_size = 0;
+ };
 
-int table::insert_vertex(const aClass &to_add)
+int graph::insert_vertex(const aClass &to_add)
 {
-    aClass *temp;
+    aClass *temp = new aClass();
     for (int i = 0; i < list_size; ++i)
     {
         if (adjacency_list[i].anEntry == NULL)
         {
-            temp = new aClass;
+            //temp = new aClass;
             temp->copyEntry(to_add);
             adjacency_list[i].anEntry = temp;
             return 1;
@@ -37,21 +42,26 @@ int table::insert_vertex(const aClass &to_add)
     return 0;
 };
 
-int table::find_location(char *key_value)
+int graph::find_location(char *key_value)
 {
-    for (int i = 0; i < list_size; ++i)
-    {
-        if (adjacency_list[i].anEntry->compare(key_value))
-        return i;
-    }
-    return 0;
+    int key = 0;
+    return find_location(key_value, key);
+}
+
+int graph::find_location(char *key_value, int key)
+{
+        if (adjacency_list[key].anEntry->compare(key_value) == true && key < list_size)
+            return key;
+        ++key;
+        return find_location(key_value, key);
 };
 
-int table::insert_edge(char *current_vertex, char *to_attach)
+int graph::insert_edge(char *current_vertex, char *to_attach)
 {
     int connOne = find_location(current_vertex);
-    int connTwo = find_location(current_vertex);
-    node *temp = new node;
+    int connTwo = find_location(to_attach);
+    node *temp;
+    temp = new node;
     temp->adjacent = &adjacency_list[connTwo];
     temp->next = adjacency_list[connOne].head;
     adjacency_list[connOne].head = temp;
@@ -63,13 +73,12 @@ int table::insert_edge(char *current_vertex, char *to_attach)
     return 1;
 };
 
-int table::display_adjacent(char *key_value)
+int graph::display_adjacent(char *key_value)
 {
-    for (int i = 0; i < list_size; ++i)
-    {
-        if (adjacency_list[i].anEntry->compare(key_value))
+        int key = find_location(key_value);
+        if (adjacency_list[key].anEntry->compare(key_value) == true)
         {
-            node *current = adjacency_list[i].head;
+            node *current = adjacency_list[key].head;
             while (current)
             {
                 if (current->adjacent)
@@ -77,6 +86,5 @@ int table::display_adjacent(char *key_value)
                 current = current->next;
             }
         }
-    }
     return 1;
 };
