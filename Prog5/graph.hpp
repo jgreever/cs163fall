@@ -7,21 +7,23 @@
  * Adjacency List / Graph of PSU Classes and Requirements
  * 
  */
-#include "entry.hpp"
+#include <iostream>
+#include <cstring>
+#include <cctype>
+#include <limits>
 
 // Forward declarations to keep compiler happy
 struct node;
-class aClass;
 
 struct vertex
 {
-    aClass *anEntry;
-    struct node *head; //”incomplete” declaration
+    char *aPSUclass;
+    struct node *head;
 };
 
 struct node 
 {
-    vertex *adjacent; //could be an index or a key
+    vertex *adjacent;
     node *next; 
 };
 
@@ -30,12 +32,16 @@ class graph
     public:
         graph(int size=5);
         ~graph(void);
-        int insert_vertex(const aClass &to_add);
+        int insert_vertex(char *classNumber);
         int find_location(char *key_value);
-        int find_location(char *key_value, int key);
-        int insert_edge(char *current_vertex, char *to_ttach);
+        node insert_edge(char *mainClass, char *preReq);
         int display_adjacent(char *key_value);
     private:
+        int get_location(char *key_value);
+        int insert_vertex(char *aClassNumber, int passed);
+        node *insert_edge(int foundOne, int foundTwo);
+        int find_location(char *key_value, int key);
+        node *head;
         vertex *adjacency_list;
         int list_size;
 };
