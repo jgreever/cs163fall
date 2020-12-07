@@ -22,7 +22,7 @@ using namespace std;
 
 int main()
 {
-    graph *mainGraph = new graph;
+    graph mainGraph;
     char classNum[10];
     char classOne[10];
     char classTwo[10];
@@ -51,7 +51,7 @@ int main()
                 cin.get(classNum, 10, '\n');
                 cin.ignore(100, '\n');
                 cin.clear();
-                mainGraph->insert_vertex(classNum);
+                mainGraph.insert_vertex(classNum);
                 break;
 
             case 2:
@@ -63,7 +63,7 @@ int main()
                 cin.get(classTwo, 10, '\n');
                 cin.ignore(100, '\n');
                 cin.clear();
-                mainGraph->insert_edge(classOne, classTwo);
+                mainGraph.insert_edge(classOne, classTwo);
                 break;
 
             case 3:
@@ -71,7 +71,7 @@ int main()
                 cin.get(classNum, 10, '\n');
                 cin.ignore(100, '\n');
                 cin.clear();
-                mainGraph->display_adjacent(classNum);
+                mainGraph.display_adjacent(classNum);
                 break;
 
             case 9:
@@ -84,8 +84,8 @@ int main()
         }
     } while (choice != 9);
 
-    if (mainGraph)
-        delete mainGraph;
+    //if (mainGraph)
+    //    delete mainGraph;
 
     return 1;
 }

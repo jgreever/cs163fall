@@ -17,14 +17,16 @@ struct node;
 
 struct vertex
 {
-    char *aPSUclass;
+    char *psuClass;
     struct node *head;
 };
 
 struct node 
 {
     vertex *adjacent;
-    node *next; 
+    node *next;
+    node();
+    ~node();
 };
 
 class graph
@@ -34,14 +36,15 @@ class graph
         ~graph(void);
         int insert_vertex(char *classNumber);
         int find_location(char *key_value);
-        node insert_edge(char *mainClass, char *preReq);
+        int insert_edge(char *mainClass, char *preReq);
         int display_adjacent(char *key_value);
     private:
         int get_location(char *key_value);
         int insert_vertex(char *aClassNumber, int passed);
-        node *insert_edge(int foundOne, int foundTwo);
+        int insert_edge(int foundOne, int foundTwo);
+        node *createNode(node *temp, int connOne, int connTwo);
         int find_location(char *key_value, int key);
-        node *head;
+        char *psuClass;
         vertex *adjacency_list;
         int list_size;
 };
