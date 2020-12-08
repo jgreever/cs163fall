@@ -84,8 +84,5 @@ int main()
         }
     } while (choice != 9);
 
-    //if (mainGraph)
-    //    delete mainGraph;
-
     return 1;
 }

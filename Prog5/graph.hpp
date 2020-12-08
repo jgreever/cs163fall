@@ -11,6 +11,7 @@
 #include <cstring>
 #include <cctype>
 #include <limits>
+#include <iomanip>
 
 // Forward declarations to keep compiler happy
 struct node;

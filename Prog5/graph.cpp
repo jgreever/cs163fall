@@ -18,8 +18,6 @@ node::~node()
 
 graph::graph(int size)
 {
-    //root = NULL;
-    //psuClass = NULL;
     adjacency_list = new vertex[size];
     for (int i = 0; i < size; ++i)
     {
@@ -35,10 +33,8 @@ graph::~graph()
     {
         delete[] adjacency_list[i].psuClass;
         delete adjacency_list[i].head;
-        //delete root;
     }
     delete[] adjacency_list;
-    //delete[] psuClass;
     list_size = 0;
 };
 
@@ -57,7 +53,6 @@ int graph::insert_vertex(char *aClassNumber, int passed)
         {
             adjacency_list[key].psuClass = new char[strlen(aClassNumber) + 1];
             strcpy(adjacency_list[key].psuClass, aClassNumber);
-            //adjacency_list[key].aPSUclass->classNumber = this->aPSUclass->classNumber;
             return 1;
         }
     }
@@ -83,56 +78,52 @@ int graph::insert_edge(char *mainClass, char *preReq)
 {
     int connOne = find_location(mainClass);
     int connTwo = find_location(preReq);
+    if (connOne == 9 || connTwo == 9)
+        return 0;
     if (insert_edge(connOne, connTwo) == 1)
         return 1;
-    else
-        return 0;
+    return 0;
 };
 
 int graph::insert_edge(int connOne, int connTwo)
 {
     node *temp = new node;
     temp = createNode(temp, connOne, connTwo);
-    //temp = new node;
-    //temp = createNode(temp, connOne, connTwo);
-    //createNode(temp, connOne, connTwo);
-    //temp->adjacent = &adjacency_list[connTwo];
-    //temp->next = adjacency_list[connOne].head;
-    //adjacency_list[connOne].head = temp;
     temp = new node;
-    //temp = new node;
     temp = createNode(temp, connTwo, connOne);
-    //createNode(temp, connTwo, connOne);
-    //temp->adjacent = &adjacency_list[connOne];
-    //temp->next = adjacency_list[connTwo].head;
-    //adjacency_list[connTwo].head = temp;
-    //delete temp;
     return 1;
 };
 
 node *graph::createNode(node *temp, int connOne, int connTwo)
 {
-    //node *temp = new node;
     temp->adjacent = &adjacency_list[connTwo];
     temp->next = adjacency_list[connOne].head;
     adjacency_list[connOne].head = temp;
-
     return temp;
 };
 
 int graph::display_adjacent(char *key_value)
 {
-    cout << "\n\nClass requirements: ";
+    cout << setw(20) << "\n\nClass Requirements:\n";
+    cout << setw(20) << "\n" << key_value << "\n";
+    cout << setw(20) << "********************\n";
     int key = find_location(key_value);
-    //node *current = new node;
     node *current = adjacency_list[key].head;
-    //current = adjacency_list[key].head;
+    cout << " | " << setw(7) << key_value << " -> ";
     while (current != NULL && key < list_size && key >= 0)
     {
-        if (current->adjacent != NULL)
-            cout << current->adjacent->psuClass << " \u2b91  ";
+        if (current->adjacent != NULL || current->adjacent->psuClass != NULL)
+        {
+            int keyComp = strcmp(current->adjacent->psuClass, key_value);
+            //if (keyComp < 0)
+                //cout << " | " << setw(7) << current->adjacent->psuClass << " -> ";
+                //cout << " | " << setw(7) << key_value << " -> ";
+            if (keyComp == 0)
+                return 1;
+            if (keyComp > 0)
+                cout << " | " << "->" << setw(7) << current->adjacent->psuClass;
+        }
         current = current->next;
     }
-    //delete current;
     return 1;
 };
